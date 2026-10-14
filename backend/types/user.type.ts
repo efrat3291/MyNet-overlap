@@ -1,4 +1,6 @@
-export type User = {
-    username: string,
-    displayedName: string
+export type CreateUserInput = {
+  username: string;
+  displayedName: string;
 };
+
+export type User = CreateUserInput;

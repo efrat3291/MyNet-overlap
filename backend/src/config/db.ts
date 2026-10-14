@@ -1,26 +1,20 @@
-import "dotenv/config";
 import { connect, disconnect, set } from "mongoose";
-import process from "node:process";
+import "dotenv/config";
+
+const MONGO_URI = process.env.MONGO_URI;
 
 export const initDB = async (): Promise<void> => {
   set("strictQuery", true);
-  
-  await connect(process.env.MONGO_URI as string)
-    .then(() => {
-      console.log("[MongoDB] connected successfully");
-    })
-    .catch((error: unknown) => {
-      console.error("[MongoDB] connection error:", error);
-      process.exit(1);
-    });
+
+  if (!MONGO_URI) {
+    throw new Error("MONGO_URI is not defined in the environment variables");
+  }
+
+  await connect(MONGO_URI);
+  console.log("[MongoDB] connected successfully");
 };
 
 export const disconnectDB = async (): Promise<void> => {
-  await disconnect()
-    .then(() => {
-      console.log("[MongoDB] disconnected");
-    })
-    .catch((error: unknown) => {
-      console.error("[MongoDB] disconnection error:", error);
-    });
+  await disconnect();
+  console.log("[MongoDB] disconnected");
 };
