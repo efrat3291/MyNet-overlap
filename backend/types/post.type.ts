@@ -1,10 +1,23 @@
-import type { Schema } from "mongoose";
+import type { Types } from "mongoose";
 
 export type Post = {
   postName: string;
-  userId: Schema.Types.ObjectId;
-  text: String;
-  media?: String;
-  likes: Number;
+  userId: Types.ObjectId;
+  text: string;
+  media?: string;
+  likes: number;
   createdAt: Date;
+};
+
+export type CreatePostInput = {
+  postName: string;
+  userId: string;
+  text: string;
+  media?: string;
+};
+
+export type UpdatePostInput = {
+  postName?: string;
+  text?: string;
+  media?: string;
 };
