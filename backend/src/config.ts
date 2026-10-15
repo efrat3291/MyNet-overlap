@@ -1,4 +1,3 @@
-
 import "dotenv/config";
 
 const { MONGO_URI, PORT } = process.env;
