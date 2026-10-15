@@ -1,7 +1,7 @@
-import "dotenv/config";
 import express from "express";
-import { initDB } from "./config/db"; 
-import process from "process";
+import process from "node:process";
+import { initDB } from "./config/db";
+import { config } from "./config";
 
 const app = express();
 
@@ -9,8 +9,8 @@ app.use(express.json());
 
 initDB()
   .then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-      console.log(`[Server] is running on port ${process.env.PORT || 3000} 🚀`);
+    app.listen(config.port, () => {
+      console.log(`[Server] is running on port ${config.port} 🚀`);
     });
   })
   .catch((error: unknown) => {

@@ -1,18 +1,13 @@
-import "dotenv/config";
-import { connect, disconnect } from "mongoose";
-import process from "process";
+import { connect } from "mongoose";
+import { config } from "../config";
 
 export const initDB = async (): Promise<void> => {
-
-  if (!process.env.MONGO_URI) {
+  if (!config.db.mongoUri) {
     throw new Error("[MongoDB] MONGO_URI environment variable is missing");
   }
 
-  await connect(process.env.MONGO_URI);
+  await connect(config.db.mongoUri);
   console.log("[MongoDB] connected successfully");
 };
 
-export const disconnectDB = async (): Promise<void> => {
-  await disconnect();
-  console.log("[MongoDB] disconnected");
-};
+

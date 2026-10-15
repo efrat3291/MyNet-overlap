@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import type { Post } from '../types/post.type.js';
 import { POST_TEXT_MAX_LENGTH } from '../constants/post.constants.js';
+import { isInteger } from 'lodash/fp';
 
 const postSchema = new Schema<Post>({
   postName: {
@@ -41,7 +42,7 @@ const postSchema = new Schema<Post>({
     default: 0,
     min: 0,
     validate: {
-      validator: Number.isInteger,
+      validator: isInteger,
       message: 'Likes must be an integer',
     },
   },
