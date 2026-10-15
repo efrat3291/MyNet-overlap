@@ -9,8 +9,8 @@ app.use(express.json());
 
 initDB()
   .then(() => {
-    app.listen(config.port, () => {
-      console.log(`[Server] is running on port ${config.port} 🚀`);
+    app.listen(config.server.port, () => {
+      console.log(`[Server] is running on port ${config.server.port} 🚀`);
     });
   })
   .catch((error: unknown) => {
