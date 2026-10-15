@@ -4,15 +4,13 @@ import { initDB } from "./config/db";
 import process from "process";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-
 initDB()
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`[Server] is running on port ${PORT} 🚀`);
+    app.listen(process.env.PORT || 3000, () => {
+      console.log(`[Server] is running on port ${process.env.PORT || 3000} 🚀`);
     });
   })
   .catch((error: unknown) => {
