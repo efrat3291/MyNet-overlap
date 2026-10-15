@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-import type { User } from "../../types/user.type.js";
+import { Schema, model } from 'mongoose';
+import type { User } from '../types/user.type';
 
 const userSchema = new Schema<User>({
   username: {
@@ -7,16 +7,13 @@ const userSchema = new Schema<User>({
     required: true,
     unique: true,
     trim: true,
-    minlength: 3,
-    maxlength: 20,
-    match: /^[a-zA-Z0-9_]+$/,
+    minlength: 2,
   },
   displayedName: {
     type: String,
     required: true,
     trim: true,
-    minlength: 1,
-    maxlength: 50,
+    minlength: 2,
   },
 });
 
