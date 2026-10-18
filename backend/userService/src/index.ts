@@ -3,10 +3,13 @@ import process from "node:process";
 import { initDB } from "./db";
 import { config } from "./config";
 import { createUserService } from "./user/index.js";
+import { errorMiddleware } from "./middlewares/error.middlware";
 
 const app = express();
 
 app.use(express.json());
+
+app.use(errorMiddleware);
 
 const { userRouter, userRpcRouter } = createUserService();
 
