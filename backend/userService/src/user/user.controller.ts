@@ -28,8 +28,27 @@ export const createUserController = (
       .catch(next);
   };
 
+  const getUserById: RequestHandler = (req, res, next) => {
+  const { userId } = req.params;
+
+  return userManager
+    .getUserById(userId)
+    .then((user) => {
+      if (!user) {
+        res.status(404).json({
+          message: "User not found",
+        });
+        return;
+      }
+
+      res.status(200).json(user);
+    })
+    .catch(next);
+};
+
   return {
     createUser,
     getAllUsers,
+    getUserById,
   };
 };

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import type { createUserController } from "./user.controller.js";
-import { validateCreateUser } from "./user.validator.js";
+import { validateCreateUser, validateGetUserById } from "./user.validator.js";
 
 export const createUserRouter = (
   userController: ReturnType<typeof createUserController>,
@@ -10,6 +10,8 @@ export const createUserRouter = (
   userRouter.post("/", validateCreateUser, userController.createUser);
 
   userRouter.get("/", userController.getAllUsers);
+
+  userRouter.get("/:userId", validateGetUserById, userController.getUserById);
 
   return userRouter;
 };
