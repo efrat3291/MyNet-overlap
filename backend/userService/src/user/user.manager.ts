@@ -8,9 +8,11 @@ export const createUserManager = (
     userRepository.createUser(input);
 
   const getAllUsers = async () => userRepository.getAllUsers();
-
+  
+  const getUserById = async (userId: string) => userRepository.getUserById(userId);
   return {
     createUser,
     getAllUsers,
+    getUserById,
   };
 };

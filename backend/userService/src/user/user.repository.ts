@@ -8,8 +8,12 @@ export const createUserRepository = (userModel: Model<User>) => {
 
   const getAllUsers = () => userModel.find().exec();
 
+  const getUserById = (userId: string) => 
+    userModel.findById(userId).exec();
+
   return {
     createUser,
     getAllUsers,
+    getUserById,
   };
 };
