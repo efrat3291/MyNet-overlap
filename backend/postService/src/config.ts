@@ -1,7 +1,7 @@
 import "dotenv/config";
 import process from "node:process";
 
-const { MONGO_URI, PORT } = process.env;
+const { MONGO_URI, PORT, USER_SERVICE_URL } = process.env;
 
 export const config = {
   db: {
@@ -9,5 +9,8 @@ export const config = {
   },
   server:{
     port: PORT,
-  }
+  },
+  services: {
+    userServiceUrl: USER_SERVICE_URL,
+  },
 };
