@@ -7,6 +7,6 @@ export const config = {
     mongoUri: MONGO_URI,
   },
   server:{
-    port: PORT || 3000,
+    port: PORT,
   }
 };
