@@ -1,14 +1,15 @@
 import type { RequestHandler } from "express";
 import type { createUserManager } from "./user.manager.js";
 import type { User } from "../../../../libs/src/types/user/user.type.js";
+import { trim } from "lodash/fp";
 
 export const createUserController = (
   userManager: ReturnType<typeof createUserManager>,
 ) => {
   const createUser: RequestHandler = (req, res, next) => {
     const input: User = {
-      username: req.body.username.trim(),
-      displayedName: req.body.displayedName.trim(),
+      username: trim(req.body.username),
+      displayedName: trim(req.body.displayedName),
     };
 
     return userManager
@@ -29,22 +30,22 @@ export const createUserController = (
   };
 
   const getUserById: RequestHandler = (req, res, next) => {
-  const { userId } = req.params;
+    const { userId } = req.params;
 
-  return userManager
-    .getUserById(userId)
-    .then((user) => {
-      if (!user) {
-        res.status(404).json({
-          message: "User not found",
-        });
-        return;
-      }
+    return userManager
+      .getUserById(userId)
+      .then((user) => {
+        if (!user) {
+          res.status(404).json({
+            message: "User not found",
+          });
+          return;
+        }
 
-      res.status(200).json(user);
-    })
-    .catch(next);
-};
+        res.status(200).json(user);
+      })
+      .catch(next);
+  };
 
   return {
     createUser,

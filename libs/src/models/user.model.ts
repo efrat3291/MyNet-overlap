@@ -1,11 +1,12 @@
-import { Schema, model } from 'mongoose';
-import type { User } from '../../../../libs/src/types/user/user.type.js';
+import { Schema, model } from "mongoose";
+import type { User } from "../types/user/user.type.js";
 
 const userSchema = new Schema<User>({
   username: {
     type: String,
     required: true,
     unique: true,
+    index: true,
     trim: true,
     minlength: 2,
   },

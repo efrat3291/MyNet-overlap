@@ -17,6 +17,7 @@
     "mongoose": "^9.11.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.26",
     "tsx": "^4.23.15"
   }
 }

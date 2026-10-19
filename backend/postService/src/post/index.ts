@@ -1,4 +1,4 @@
-import { PostModel } from "../models/post.model.js";
+import { PostModel } from "../../../../libs/src/models/post.model.js";
 import { createPostRepository } from "./post.repository.js";
 import { createPostManager } from "./post.manager.js";
 import { createPostController } from "./post.controller.js";

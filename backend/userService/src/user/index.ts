@@ -1,4 +1,4 @@
-import { UserModel } from "../models/user.model.js";
+import { UserModel } from "../../../../libs/src/models/user.model.js";
 import { createUserRepository } from "./user.repository.js";
 import { createUserManager } from "./user.manager.js";
 import { createUserController } from "./user.controller.js";

@@ -3,7 +3,7 @@ import process from "node:process";
 import { initDB } from "./db";
 import { config } from "./config";
 import { createUserService } from "./user/index.js";
-import { errorMiddleware } from "./middlewares/error.middlware";
+import { errorMiddleware } from "./middlewares/error.middleware";
 
 const app = express();
 

@@ -1,4 +1,6 @@
-const USER_SERVICE_URL =process.env.USER_SERVICE_URL;
+import {config } from "../config.js";
+
+const USER_SERVICE_URL =config.services.userServiceUrl;
 
 export const createUserRpcClient = () => {
   const getUserById = async (userId: string): Promise<boolean> => {
