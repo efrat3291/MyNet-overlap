@@ -1,5 +1,4 @@
 import type { RequestHandler } from "express";
-
 import type { createPostManager } from "./post.manager.js";
 
 export const createPostController = (

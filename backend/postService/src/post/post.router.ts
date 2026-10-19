@@ -1,7 +1,5 @@
 import { Router } from "express";
-
 import type { createPostController } from "./post.controller.js";
-
 import {
   validateCreatePost,
   validatePostId,

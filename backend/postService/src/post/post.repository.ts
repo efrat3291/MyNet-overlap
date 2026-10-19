@@ -1,5 +1,4 @@
 import type { Model, Types } from "mongoose";
-
 import type { Post } from "../../../../libs/src/types/post/post.type.js";
 
 export const createPostRepository = (postModel: Model<Post>) => {

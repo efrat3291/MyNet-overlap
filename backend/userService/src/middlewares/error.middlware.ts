@@ -1,4 +1,3 @@
-
 import type { ErrorRequestHandler } from "express";
 
 export const errorMiddleware: ErrorRequestHandler = (
