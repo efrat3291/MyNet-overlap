@@ -1,42 +1,22 @@
 import { Router } from "express";
-import type { createPostController } from "./post.controller.js";
+import { postController } from "./post.controller.js";
 import {
   validateCreatePost,
   validatePostId,
   validateUpdatePost,
 } from "./post.validator.js";
 
-export const createPostRouter = (
-  postController: ReturnType<typeof createPostController>,
-) => {
-  const postRouter = Router();
+const postRouter = Router();
 
-  postRouter.post(
-    "/",
-    validateCreatePost,
-    postController.createPost,
-  );
+postRouter.post("/", validateCreatePost, postController.create);
+postRouter.get("/", postController.getAll);
+postRouter.get("/:id", validatePostId, postController.getById);
+postRouter.put(
+  "/:id",
+  validatePostId,
+  validateUpdatePost,
+  postController.update,
+);
+postRouter.delete("/:id", validatePostId, postController.delete);
 
-  postRouter.get("/", postController.getAllPosts);
-
-  postRouter.get(
-    "/:id",
-    validatePostId,
-    postController.getPostById,
-  );
-
-  postRouter.put(
-    "/:id",
-    validatePostId,
-    validateUpdatePost,
-    postController.updatePost,
-  );
-
-  postRouter.delete(
-    "/:id",
-    validatePostId,
-    postController.deletePost,
-  );
-
-  return postRouter;
-};
+export default postRouter;

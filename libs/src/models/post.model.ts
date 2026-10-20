@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 import { isInteger } from "lodash/fp";
-
 import type { Post } from "../types/post/post.type.js";
 
 const POST_TEXT_MAX_LENGTH = 200;

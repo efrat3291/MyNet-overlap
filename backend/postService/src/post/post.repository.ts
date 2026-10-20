@@ -1,34 +1,25 @@
-import type { Model, Types } from "mongoose";
+import { PostModel } from "../../../../libs/src/models/post.model.js";
 import type { Post } from "../../../../libs/src/types/post/post.type.js";
+import type { CreatePostPayload } from "../../../../libs/src/types/post/postPayload.type.js";
+import type { UpdatePostPayload } from "../types/postPayload.type.js";
 
-export const createPostRepository = (postModel: Model<Post>) => {
-  const createPost = (input: Post) => postModel.create(input);
+export const postRepository = {
+  create: async (post: CreatePostPayload): Promise<Post> => await PostModel.create(post),
 
-  const getAllPosts = () =>
-    postModel.find().sort({ createdAt: -1 }).exec();
+  getAll: async (): Promise<Post[]> =>
+    await PostModel.find().sort({ createdAt: -1 }).exec(),
 
-  const getPostById = (id: string) =>
-    postModel.findById(id).exec();
+  getById: async (id: string): Promise<Post> =>
+    await PostModel.findById(id).orFail().exec(),
 
-  const updatePost = (
-    id: string,
-    changes: Partial<Pick<Post, "postName" | "text" | "media">>,
-  ) =>
-    postModel
-      .findByIdAndUpdate(id, changes, {
-        new: true,
-        runValidators: true,
-      })
-      .exec();
+  update: async (id: string, post: UpdatePostPayload): Promise<Post> =>
+    await PostModel.findByIdAndUpdate(id, post, {
+      new: true,
+      runValidators: true,
+    })
+      .orFail()
+      .exec(),
 
-  const deletePost = (id: string) =>
-    postModel.findByIdAndDelete(id).exec();
-
-  return {
-    createPost,
-    getAllPosts,
-    getPostById,
-    updatePost,
-    deletePost,
-  };
+  delete: async (id: string): Promise<Post> =>
+    await PostModel.findByIdAndDelete(id).orFail().exec(),
 };

@@ -1,15 +1,24 @@
-import { createPostRepository } from "./post.repository.js";
-import type { createUserRpcClient } from "../post/user.rpc.client.js";
 import { isNil } from "lodash/fp";
 import { HTTP_STATUS } from "../../../../libs/src/consts/http.consts.js";
+import type { Post } from "../../../../libs/src/types/post/post.type.js";
+import type { CreatePostPayload } from "../../../../libs/src/types/post/postPayload.type.js";
 
-export const createPostManager = (
-  postRepository: ReturnType<typeof createPostRepository>,
-  userRpcClient: ReturnType<typeof createUserRpcClient>,
-) => {
-  const createPost = async (
-    input: Parameters<typeof postRepository.createPost>[0],
-  ) => {
+import { postRepository } from "./post.repository.js";
+import { userRpcClient } from "./user.rpc.client.js";
+
+import type { UpdatePostPayload } from "../types/postPayload.type.js";
+
+export const postManager = {
+  create: async (post: CreatePostPayload): Promise<Post> => {
+    const input: CreatePostPayload = {
+      ...post,
+      postName: post.postName.trim(),
+      text: post.text.trim(),
+      ...(post.media !== undefined
+        ? { media: post.media.trim() }
+        : {}),
+    };
+
     const user = await userRpcClient.getUserById(input.userId);
 
     if (isNil(user)) {
@@ -18,25 +27,31 @@ export const createPostManager = (
       throw error;
     }
 
-    return postRepository.createPost(input);
-  };
+    return await postRepository.create(input);
+  },
 
-  const getAllPosts = () => postRepository.getAllPosts();
+  getAll: postRepository.getAll,
 
-  const getPostById = async (id: string) => postRepository.getPostById(id);
+  getById: postRepository.getById,
 
-  const updatePost = async (
+  update: async (
     id: string,
-    changes: Parameters<typeof postRepository.updatePost>[1],
-  ) => postRepository.updatePost(id, changes);
+    post: UpdatePostPayload,
+  ): Promise<Post> => {
+    const input: UpdatePostPayload = {
+      ...(post.postName !== undefined
+        ? { postName: post.postName.trim() }
+        : {}),
+      ...(post.text !== undefined
+        ? { text: post.text.trim() }
+        : {}),
+      ...(post.media !== undefined
+        ? { media: post.media.trim() }
+        : {}),
+    };
 
-  const deletePost = async (id: string) => postRepository.deletePost(id);
+    return await postRepository.update(id, input);
+  },
 
-  return {
-    createPost,
-    getAllPosts,
-    getPostById,
-    updatePost,
-    deletePost,
-  };
+  delete: postRepository.delete,
 };
