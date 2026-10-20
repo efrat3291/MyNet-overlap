@@ -1,55 +1,32 @@
-import type { RequestHandler } from "express";
-import type { createUserManager } from "./user.manager.js";
+import type { Request, Response } from "express";
+import { userManager } from "./user.manager.js";
 import type { User } from "../../../../libs/src/types/user/user.type.js";
 import { trim } from "lodash/fp";
 
-export const createUserController = (
-  userManager: ReturnType<typeof createUserManager>,
-) => {
-  const createUser: RequestHandler = (req, res, next) => {
+export const userController = {
+  create: async (req: Request, res: Response): Promise<void> => {
     const input: User = {
       username: trim(req.body.username),
       displayedName: trim(req.body.displayedName),
     };
 
-    return userManager
-      .createUser(input)
-      .then((user) => {
-        res.status(201).json(user);
-      })
-      .catch(next);
-  };
+    res.status(201).json(await userManager.createUser(input));
+  },
 
-  const getAllUsers: RequestHandler = (req, res, next) => {
-    return userManager
-      .getAllUsers()
-      .then((users) => {
-        res.status(200).json(users);
-      })
-      .catch(next);
-  };
+  getAll: async (_req: Request, res: Response): Promise<void> => {
+    res.status(200).json(await userManager.getAllUsers());
+  },
 
-  const getUserById: RequestHandler = (req, res, next) => {
-    const { userId } = req.params;
+  getById: async (req: Request, res: Response): Promise<void> => {
+    const user = await userManager.getUserById(req.params.userId);
 
-    return userManager
-      .getUserById(userId)
-      .then((user) => {
-        if (!user) {
-          res.status(404).json({
-            message: "User not found",
-          });
-          return;
-        }
+    if (!user) {
+      res.status(404).json({
+        message: "User not found",
+      });
+      return;
+    }
 
-        res.status(200).json(user);
-      })
-      .catch(next);
-  };
-
-  return {
-    createUser,
-    getAllUsers,
-    getUserById,
-  };
+    res.status(200).json(user);
+  },
 };

@@ -1,18 +1,18 @@
-import { createUserRepository } from "./user.repository.js";
+import { userRepository } from "./user.repository.js";
 import type { User } from "../../../../libs/src/types/user/user.type.js";
 
-export const createUserManager = (
-  userRepository: ReturnType<typeof createUserRepository>,
-) => {
-  const createUser = async (input: User) =>
-    userRepository.createUser(input);
+export const userManager = {
+  create: async (user: User): Promise<User> => {
+    const input: User = {
+      ...user,
+      username: user.username.trim(),
+      displayedName: user.displayedName.trim(),
+    };
 
-  const getAllUsers = async () => userRepository.getAllUsers();
-  
-  const getUserById = async (userId: string) => userRepository.getUserById(userId);
-  return {
-    createUser,
-    getAllUsers,
-    getUserById,
-  };
+    return await userRepository.create(input);
+  },
+
+  getAll: userRepository.getAll,
+
+  getById: userRepository.getById,
 };

@@ -1,19 +1,28 @@
-import type { Model } from "mongoose";
-import type {
-  User,
-} from "../../../../libs/src/types/user/user.type.js";
+import { UserModel } from "../../../../libs/src/models/user.model.js";
+import type { User } from "../../../../libs/src/types/user/user.type.js";
+import type { UpdateUserPayload } from "../types/userPayload.type.js";
 
-export const createUserRepository = (userModel: Model<User>) => {
-  const createUser = (input: User) => userModel.create(input);
+export const userRepository = {
+  create: async (user: User): Promise<User> =>
+    await UserModel.create(user),
 
-  const getAllUsers = () => userModel.find().exec();
+  getAll: async (): Promise<User[]> =>
+    await UserModel.find().exec(),
 
-  const getUserById = (id: string) => 
-    userModel.findById(id).exec();
+  getById: async (id: string): Promise<User> =>
+    await UserModel.findById(id).orFail().exec(),
 
-  return {
-    createUser,
-    getAllUsers,
-    getUserById,
-  };
+  update: async (
+    id: string,
+    user: UpdateUserPayload,
+  ): Promise<User> =>
+    await UserModel.findByIdAndUpdate(id, user, {
+      new: true,
+      runValidators: true,
+    })
+      .orFail()
+      .exec(),
+
+  delete: async (id: string): Promise<User> =>
+    await UserModel.findByIdAndDelete(id).orFail().exec(),
 };
