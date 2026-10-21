@@ -1,32 +1,25 @@
 import type { Request, Response } from "express";
 import { userManager } from "./user.manager.js";
-import type { User } from "../../../../libs/src/types/user/user.type.js";
-import { trim } from "lodash/fp";
+import type { User } from "@libs/types/user/user.type.js";
 
 export const userController = {
   create: async (req: Request, res: Response): Promise<void> => {
     const input: User = {
-      username: trim(req.body.username),
-      displayedName: trim(req.body.displayedName),
+      username: req.body.username,
+      displayedName: req.body.displayedName,
     };
 
-    res.status(201).json(await userManager.createUser(input));
+    res.status(201).json(await userManager.create(input));
   },
 
   getAll: async (_req: Request, res: Response): Promise<void> => {
-    res.status(200).json(await userManager.getAllUsers());
+    res.status(200).json(await userManager.getAll());
   },
 
-  getById: async (req: Request, res: Response): Promise<void> => {
-    const user = await userManager.getUserById(req.params.userId);
-
-    if (!user) {
-      res.status(404).json({
-        message: "User not found",
-      });
-      return;
-    }
-
-    res.status(200).json(user);
+  getById: async (
+    req: Request<{ userId: string }>,
+    res: Response,
+  ): Promise<void> => {
+    res.status(200).json(await userManager.getById(req.params.userId));
   },
 };

@@ -1,6 +1,6 @@
-import { PostModel } from "../../../../libs/src/models/post.model.js";
-import type { Post } from "../../../../libs/src/types/post/post.type.js";
-import type { CreatePostPayload } from "../../../../libs/src/types/post/postPayload.type.js";
+import { PostModel } from "@libs/models/post.model.js";
+import type { Post } from "@libs/types/post/post.type.js";
+import type { CreatePostPayload } from "@libs/types/post/postPayload.type.js";
 import type { UpdatePostPayload } from "../types/postPayload.type.js";
 
 export const postRepository = {

@@ -3,13 +3,14 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "rootDir": ".",
-    "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@libs/*": ["../../libs/src/*"],
+    },
   },
-  "include": ["src/**/*.ts", "../types/**/*.ts", "../../libs/src/types/user/user.type.ts", "../../libs/src/types/post/post.type.ts", "../../libs/src/models/user.model.ts"],
+  "include": ["src/**/*.ts", "../types/**/*.ts", "../../libs/src/types/user/user.type.ts", "../../libs/src/types/post/post.type.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,4 +1,4 @@
-import { connectDB } from "../../../libs/src/db.js";
+import { connectDB } from "@libs/db.js";
 import { config } from "./config.js";
 
 export const initDB = async (): Promise<void> => {

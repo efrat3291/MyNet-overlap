@@ -1,10 +1,10 @@
 import { isNil } from "lodash/fp";
-import { HTTP_STATUS } from "../../../../libs/src/consts/http.consts.js";
-import type { Post } from "../../../../libs/src/types/post/post.type.js";
-import type { CreatePostPayload } from "../../../../libs/src/types/post/postPayload.type.js";
+import { HTTP_STATUS } from "@libs/consts/http.consts.js";
+import type { Post } from "@libs/types/post/post.type.js";
+import type { CreatePostPayload } from "@libs/types/post/postPayload.type.js";
 
 import { postRepository } from "./post.repository.js";
-import { userRpcClient } from "./user.rpc.client.js";
+import { userService } from "../rpc.client.js";
 
 import type { UpdatePostPayload } from "../types/postPayload.type.js";
 
@@ -19,7 +19,7 @@ export const postManager = {
         : {}),
     };
 
-    const user = await userRpcClient.getUserById(input.userId);
+    const user = await userService.getUserById(input.userId);
 
     if (isNil(user)) {
       const error = new Error("User not found");

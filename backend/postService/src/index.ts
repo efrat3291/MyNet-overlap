@@ -2,14 +2,14 @@ import express from "express";
 import process from "node:process";
 import { initDB } from "./db.js";
 import { config } from "./config.js";
-import { createPostRouter } from "./post/post.router.js";
-import { startServer } from "../../../libs/src/startServer.js";
+import { appRouter } from "./router.js";
+import { startServer } from "@libs/startServer.js";
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/posts", createPostRouter());
+app.use(appRouter);
 
 startServer(
   app,

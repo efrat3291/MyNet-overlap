@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { joiMongoId } from "../../../../libs/src/joi/joiMongo.validate";
+import { joiMongoId } from "@libs/joi/joiMongo.validate";
 
 export const createPostSchema = Joi.object({
   body: Joi.object({
@@ -17,7 +17,7 @@ export const createPostSchema = Joi.object({
 });
 
 export const postIdSchema = Joi.object({
-  body: Joi.object().required(),
+  body: Joi.object().optional(),
 
   params: Joi.object({
     id: joiMongoId().required(),
@@ -28,8 +28,8 @@ export const postIdSchema = Joi.object({
 
 export const updatePostSchema = Joi.object({
   body: Joi.object({
-    postName: Joi.string().trim().required(),
-    text: Joi.string().trim().min(1).max(200).required(),
+    postName: Joi.string().trim().optional(),
+    text: Joi.string().trim().min(1).max(200).optional(),
     media: Joi.string()
       .uri({ scheme: ["http", "https"] })
       .allow("", null)
