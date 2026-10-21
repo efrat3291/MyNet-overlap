@@ -1,16 +1,25 @@
-import process from "node:process";
 import "dotenv/config";
+import { serviceInfo } from "@libs/serviceInfo.js";
 
-const { MONGO_URI, PORT, USER_SERVICE_URL } = process.env;
+const { MONGO_URI, RPC_HOSTNAME } = process.env;
+
+if (!MONGO_URI) {
+  throw new Error("Missing MONGO_URI environment variable");
+}
+
+if (!RPC_HOSTNAME) {
+  throw new Error("Missing RPC_HOSTNAME environment variable");
+}
 
 export const config = {
   db: {
     mongoUri: MONGO_URI,
   },
-  server:{
-    port:Number(PORT),
+  server: {
+    port: serviceInfo.content.local.port,
   },
-  services: {
-    userServiceUrl: USER_SERVICE_URL,
+  rpc: {
+    host: RPC_HOSTNAME,
+    port: serviceInfo.user.local.port,
   },
 };

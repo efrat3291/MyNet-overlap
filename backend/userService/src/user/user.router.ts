@@ -1,18 +1,27 @@
 import { Router } from "express";
 import { userController } from "./user.controller.js";
+import { validateRequest } from "@libs/middlewares/validateRequest.js";
 import {
-  validateCreateUser,
-  validateGetUserById,
+  createUserSchema,
+  getUserByIdSchema,
 } from "./user.validator.js";
 
-const userRouter = Router();
+export const createUserRouter = () => {
+  const userRouter = Router();
 
-userRouter.post("/", validateCreateUser, userController.create);
-userRouter.get("/", userController.getAll);
-userRouter.get(
-  "/:userId",
-  validateGetUserById,
-  userController.getById,
-);
+  userRouter.post(
+    "/",
+    validateRequest(createUserSchema),
+    userController.create,
+  );
 
-export default userRouter;
+  userRouter.get("/", userController.getAll);
+
+  userRouter.get(
+    "/:userId",
+    validateRequest(getUserByIdSchema),
+    userController.getById,
+  );
+
+  return userRouter;
+};

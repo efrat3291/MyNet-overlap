@@ -1,22 +1,40 @@
 import { Router } from "express";
 import { postController } from "./post.controller.js";
+import { validateRequest } from "@libs/middlewares/validateRequest.js";
 import {
-  validateCreatePost,
-  validatePostId,
-  validateUpdatePost,
+  createPostSchema,
+  postIdSchema,
+  updatePostSchema,
 } from "./post.validator.js";
 
-const postRouter = Router();
+export const createPostRouter = () => {
+  const postRouter = Router();
 
-postRouter.post("/", validateCreatePost, postController.create);
-postRouter.get("/", postController.getAll);
-postRouter.get("/:id", validatePostId, postController.getById);
-postRouter.put(
-  "/:id",
-  validatePostId,
-  validateUpdatePost,
-  postController.update,
-);
-postRouter.delete("/:id", validatePostId, postController.delete);
+  postRouter.post(
+    "/",
+    validateRequest(createPostSchema),
+    postController.create,
+  );
 
-export default postRouter;
+  postRouter.get("/", postController.getAll);
+
+  postRouter.get(
+    "/:id",
+    validateRequest(postIdSchema),
+    postController.getById,
+  );
+
+  postRouter.patch(
+    "/:id",
+    validateRequest(updatePostSchema),
+    postController.update,
+  );
+
+  postRouter.delete(
+    "/:id",
+    validateRequest(postIdSchema),
+    postController.delete,
+  );
+
+  return postRouter;
+};
