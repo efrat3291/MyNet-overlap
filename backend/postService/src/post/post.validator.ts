@@ -1,97 +1,46 @@
-import type { Request, Response, NextFunction } from "express";
-import { isValidObjectId } from "mongoose";
+import Joi from "joi";
+import { joiMongoId } from "../../../../libs/src/joi/joiMongo.validate";
 
-const isNonEmptyString = (value: unknown): value is string =>
-  typeof value === "string" && value.trim().length > 0;
+export const createPostSchema = Joi.object({
+  body: Joi.object({
+    postName: Joi.string().trim().required(),
+    userId: joiMongoId().required(),
+    text: Joi.string().trim().min(1).max(200).required(),
+    media: Joi.string()
+      .uri({ scheme: ["http", "https"] })
+      .allow("", null)
+      .optional(),
+  }).required(),
 
-const isValidMedia = (value: unknown): boolean => {
-  if (value === undefined || value === null || value === "") {
-    return true;
-  }
+  params: Joi.object().required(),
+  query: Joi.object().required(),
+});
 
-  if (typeof value !== "string") {
-    return false;
-  }
+export const postIdSchema = Joi.object({
+  body: Joi.object().required(),
 
-  try {
-    const url = new URL(value);
+  params: Joi.object({
+    id: joiMongoId().required(),
+  }).required(),
 
-    return (
-      (url.protocol === "http:" || url.protocol === "https:") &&
-      url.hostname.length > 0
-    );
-  } catch {
-    return false;
-  }
-};
+  query: Joi.object().required(),
+});
 
-export const validateCreatePost = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): void => {
-  const { postName, userId, text, media } = req.body;
+export const updatePostSchema = Joi.object({
+  body: Joi.object({
+    postName: Joi.string().trim().required(),
+    text: Joi.string().trim().min(1).max(200).required(),
+    media: Joi.string()
+      .uri({ scheme: ["http", "https"] })
+      .allow("", null)
+      .optional(),
+  })
+    .min(1)
+    .required(),
 
-  const isValid =
-    isNonEmptyString(postName) &&
-    isValidObjectId(userId) &&
-    isNonEmptyString(text) &&
-    text.trim().length <= 200 &&
-    isValidMedia(media);
+  params: Joi.object({
+    id: joiMongoId().required(),
+  }).required(),
 
-  if (!isValid) {
-    res.status(400).json({
-      message:
-        "postName, valid userId and text (1-200 characters) are required; media must be a valid HTTP or HTTPS URL when provided",
-    });
-    return;
-  }
-
-  next();
-};
-
-export const validatePostId = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): void => {
-  if (!isValidObjectId(req.params.id)) {
-    res.status(400).json({
-      message: "id must be a valid post id",
-    });
-    return;
-  }
-
-  next();
-};
-
-export const validateUpdatePost = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): void => {
-  const { postName, text, media } = req.body;
-
-  const hasPostName = postName !== undefined;
-  const hasText = text !== undefined;
-  const hasMedia = media !== undefined;
-
-  const hasChanges = hasPostName || hasText || hasMedia;
-
-  const isValid =
-    hasChanges &&
-    (!hasPostName || isNonEmptyString(postName)) &&
-    (!hasText ||
-      (isNonEmptyString(text) && text.trim().length <= 200)) &&
-    (!hasMedia || isValidMedia(media));
-
-  if (!isValid) {
-    res.status(400).json({
-      message:
-        "Provide at least one valid field: postName, text (1-200 characters), or media (HTTP/HTTPS URL or null)",
-    });
-    return;
-  }
-
-  next();
-};
+  query: Joi.object().required(),
+});
