@@ -1,28 +1,24 @@
 import express from "express";
 import process from "node:process";
-import { initDB } from "./db";
-import { config } from "./config";
-import { createUserService } from "./user/index.js";
-import { errorMiddleware } from "./middlewares/error.middleware";
+import { config } from "./config.js";
+import { initDB } from "./db.js";
+import { createUserRouter } from "./user/user.router.js";
+import { createUserRpcServer } from "./user/user.rpc.server.js";
+import { startServer } from "../../../libs/src/startServer.js";
 
 const app = express();
 
 app.use(express.json());
 
-app.use(errorMiddleware);
+app.use("/users", createUserRouter());
+//app.use("/rpc/users", createUserRpcServer);
 
-const { userRouter, userRpcRouter } = createUserService();
-
-app.use("/users", userRouter);
-app.use("/rpc/users", userRpcRouter);
-
-initDB()
-  .then(() => {
-    app.listen(config.server.port, () => {
-      console.log(`[Server] is running on port ${config.server.port} 🚀`);
-    });
-  })
-  .catch((error: unknown) => {
-    console.error("[Server] Failed to start due to database error:", error);
-    process.exit(1);
-  });
+startServer(
+  app,
+  config.server.port,
+  initDB,
+  "UserService",
+).catch((error: unknown) => {
+  console.error("[UserService] Failed to start:", error);
+  process.exit(1);
+});

@@ -1,4 +1,5 @@
 import process from "node:process";
+import "dotenv/config";
 
 const { MONGO_URI, PORT, USER_SERVICE_URL } = process.env;
 
@@ -7,7 +8,7 @@ export const config = {
     mongoUri: MONGO_URI,
   },
   server:{
-    port: PORT,
+    port:Number(PORT),
   },
   services: {
     userServiceUrl: USER_SERVICE_URL,
