@@ -1,39 +1,37 @@
 import Joi from "joi";
 import { joiMongoId } from "@libs/joi/joiMongo.validate";
+import { POST_TEXT_MAX_LENGTH } from "@libs/consts/post.consts.js";
 
-export const createPostSchema = Joi.object({
+export const canCreate = Joi.object({
   body: Joi.object({
     postName: Joi.string().trim().required(),
     userId: joiMongoId().required(),
-    text: Joi.string().trim().min(1).max(200).required(),
+    text: Joi.string().trim().min(1).max(POST_TEXT_MAX_LENGTH).required(),
     media: Joi.string()
       .uri({ scheme: ["http", "https"] })
-      .allow("", null)
-      .optional(),
+      .allow("", null),
   }).required(),
 
-  params: Joi.object().required(),
-  query: Joi.object().required(),
+  params: Joi.object(),
+  query: Joi.object(),
 });
 
-export const postIdSchema = Joi.object({
-  body: Joi.object().optional(),
+export const canGetById = Joi.object({
+  body: Joi.object(),
 
   params: Joi.object({
     id: joiMongoId().required(),
   }).required(),
 
-  query: Joi.object().required(),
+  query: Joi.object(),
 });
 
-export const updatePostSchema = Joi.object({
+export const canUpdate = Joi.object({
   body: Joi.object({
     postName: Joi.string().trim().optional(),
-    text: Joi.string().trim().min(1).max(200).optional(),
+    text: Joi.string().trim().min(1).max(POST_TEXT_MAX_LENGTH).optional(),
     media: Joi.string()
-      .uri({ scheme: ["http", "https"] })
-      .allow("", null)
-      .optional(),
+      .uri({ scheme: ["http", "https"] }),
   })
     .min(1)
     .required(),
@@ -42,5 +40,21 @@ export const updatePostSchema = Joi.object({
     id: joiMongoId().required(),
   }).required(),
 
-  query: Joi.object().required(),
+  query: Joi.object(),
+});
+
+export const canDelete = Joi.object({
+  body: Joi.object(),
+
+  params: Joi.object({
+    id: joiMongoId().required(),
+  }).required(),
+
+  query: Joi.object(),
+});
+
+export const canGetAll = Joi.object({
+  body: Joi.object(),
+  params: Joi.object(),
+  query: Joi.object(),
 });

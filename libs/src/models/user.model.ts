@@ -8,13 +8,13 @@ const userSchema = new Schema<User>({
     unique: true,
     index: true,
     trim: true,
-    minlength: 2,
+    minlength: 1,
   },
   displayedName: {
     type: String,
     required: true,
     trim: true,
-    minlength: 2,
+    minlength: 1,
   },
 });
 

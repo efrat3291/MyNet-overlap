@@ -1,4 +1,6 @@
 import type { Request, Response } from "express";
+import type { UpdatePostPayload } from "./post.types";
+
 import { postManager } from "./post.manager.js";
 
 export const postController = {
@@ -10,20 +12,26 @@ export const postController = {
     res.status(200).json(await postManager.getAll());
   },
 
-  getById: async (req: Request, res: Response): Promise<void> => {
+  getById: async (
+    req: Request<{ id: string }>,
+    res: Response,
+  ): Promise<void> => {
     res.status(200).json(await postManager.getById(req.params.id));
   },
 
-  update: async (req: Request, res: Response): Promise<void> => {
-    res.status(200).json(await postManager.update(req.params.id, req.body));
+  update: async (
+    req: Request<{ id: string }, {}, UpdatePostPayload>,
+    res: Response,
+  ): Promise<void> => {
+    res.status(200).json(
+      await postManager.update(req.params.id, req.body),
+    );
   },
 
-  delete: async (req: Request, res: Response): Promise<void> => {
-    const deletedPost = await postManager.delete(req.params.id);
-
-    res.status(200).json({
-      message: "Post deleted successfully",
-      post: deletedPost,
-    });
+  delete: async (
+    req: Request<{ id: string }>,
+    res: Response,
+  ): Promise<void> => {
+    res.status(200).json(await postManager.delete(req.params.id));
   },
 };

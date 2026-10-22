@@ -2,39 +2,44 @@ import { Router } from "express";
 import { postController } from "./post.controller.js";
 import { validateRequest } from "@libs/middlewares/validateRequest.js";
 import {
-  createPostSchema,
-  postIdSchema,
-  updatePostSchema,
+  canCreate,
+  canGetAll,
+  canGetById,
+  canUpdate,
+  canDelete,
 } from "./post.validator.js";
 
-export const createPostRouter = () => {
-  const postRouter = Router();
+const postRouter = Router();
 
-  postRouter.post(
-    "/",
-    validateRequest(createPostSchema),
-    postController.create,
-  );
+postRouter.post(
+  "/",
+  validateRequest(canCreate),
+  postController.create,
+);
 
-  postRouter.get("/", postController.getAll);
+postRouter.get(
+  "/",
+  validateRequest(canGetAll),
+  postController.getAll,
+);
 
-  postRouter.get(
-    "/:id",
-    validateRequest(postIdSchema),
-    postController.getById,
-  );
 
-  postRouter.patch(
-    "/:id",
-    validateRequest(updatePostSchema),
-    postController.update,
-  );
+postRouter.get(
+  "/:id",
+  validateRequest(canGetById),
+  postController.getById,
+);
 
-  postRouter.delete(
-    "/:id",
-    validateRequest(postIdSchema),
-    postController.delete,
-  );
+postRouter.patch(
+  "/:id",
+  validateRequest(canUpdate),
+  postController.update,
+);
 
-  return postRouter;
-};
+postRouter.delete(
+  "/:id",
+  validateRequest(canDelete),
+  postController.delete,
+);
+
+export { postRouter };

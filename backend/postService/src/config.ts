@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { serviceInfo } from "@libs/serviceInfo.js";
+import { serviceInfo } from "@libs/server/serviceInfo.js";
 
 const { MONGO_URI, RPC_HOSTNAME } = process.env;
 

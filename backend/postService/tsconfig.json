@@ -13,10 +13,5 @@
       "@libs/*": ["../../libs/src/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "../types/**/*.ts",
-    "../../libs/src/**/*.ts"
-  ],
   "exclude": ["node_modules", "dist"]
 }

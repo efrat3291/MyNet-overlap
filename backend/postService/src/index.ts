@@ -3,7 +3,7 @@ import process from "node:process";
 import { initDB } from "./db.js";
 import { config } from "./config.js";
 import { appRouter } from "./router.js";
-import { startServer } from "@libs/startServer.js";
+import { startServer } from "@libs/server/startServer.js";
 
 const app = express();
 

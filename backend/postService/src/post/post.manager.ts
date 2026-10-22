@@ -1,25 +1,14 @@
 import { isNil } from "lodash/fp";
 import { HTTP_STATUS } from "@libs/consts/http.consts.js";
 import type { Post } from "@libs/types/post/post.type.js";
-import type { CreatePostPayload } from "@libs/types/post/postPayload.type.js";
-
+import type { CreatePostPayload } from "./post.types";
 import { postRepository } from "./post.repository.js";
 import { userService } from "../rpc.client.js";
-
-import type { UpdatePostPayload } from "../types/postPayload.type.js";
+import type { UpdatePostPayload } from "./post.types.js";
 
 export const postManager = {
   create: async (post: CreatePostPayload): Promise<Post> => {
-    const input: CreatePostPayload = {
-      ...post,
-      postName: post.postName.trim(),
-      text: post.text.trim(),
-      ...(post.media !== undefined
-        ? { media: post.media.trim() }
-        : {}),
-    };
-
-    const user = await userService.getUserById(input.userId);
+    const user = await userService.getUserById(post.userId);
 
     if (isNil(user)) {
       const error = new Error("User not found");
@@ -27,7 +16,7 @@ export const postManager = {
       throw error;
     }
 
-    return await postRepository.create(input);
+    return await postRepository.create(post);
   },
 
   getAll: postRepository.getAll,
@@ -38,19 +27,7 @@ export const postManager = {
     id: string,
     post: UpdatePostPayload,
   ): Promise<Post> => {
-    const input: UpdatePostPayload = {
-      ...(post.postName !== undefined
-        ? { postName: post.postName.trim() }
-        : {}),
-      ...(post.text !== undefined
-        ? { text: post.text.trim() }
-        : {}),
-      ...(post.media !== undefined
-        ? { media: post.media.trim() }
-        : {}),
-    };
-
-    return await postRepository.update(id, input);
+    return await postRepository.update(id, post);
   },
 
   delete: postRepository.delete,

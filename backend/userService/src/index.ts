@@ -4,7 +4,7 @@ import { config } from "./config.js";
 import { initDB } from "./db.js";
 import { appRouter } from "./router.js";
 import { rpcServer } from "./rpc.server.js";
-import { startServer } from "@libs/startServer.js";
+import { startServer } from "@libs/server/startServer.js";
 
 const app = express();
 
