@@ -4,12 +4,10 @@ import type { Post } from "@libs/types/post/post.type.js";
 import type { CreatePostPayload } from "./post.types";
 import { postRepository } from "./post.repository.js";
 import { userService } from "../rpc.client.js";
-import type { UpdatePostPayload } from "./post.types.js";
 
 export const postManager = {
   create: async (post: CreatePostPayload): Promise<Post> => {
-    const user = await userService.getUserById(post.userId.toString());
-
+    const user = await userService.getUserById(String(post.userId));
     if (isNil(user)) {
       const error = new Error("User not found");
       Object.assign(error, { statusCode: HTTP_STATUS.NOT_FOUND });
