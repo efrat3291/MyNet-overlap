@@ -16,7 +16,7 @@ export const config = {
     mongoUri: MONGO_URI,
   },
   server: {
-    port: serviceInfo.content.local.port,
+    port: serviceInfo.post.local.port,
   },
   rpc: {
     host: RPC_HOSTNAME,

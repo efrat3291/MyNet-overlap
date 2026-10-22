@@ -17,7 +17,7 @@ export const userRPCService = (
   });
 
   return {
-    getUserById: (userId: string) =>
+    getUserById: (userId: string)  : Promise <User> =>
       rpcClientRequest(userRPCClient, "getUserById", {
         userId,
       }),

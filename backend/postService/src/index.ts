@@ -15,8 +15,8 @@ startServer(
   app,
   config.server.port,
   initDB,
-  "ContentService",
+  "PostService",
 ).catch((error: unknown) => {
-  console.error("[ContentService] Failed to start:", error);
+  console.error("[PostService] Failed to start:", error);
   process.exit(1);
 });

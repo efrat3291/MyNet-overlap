@@ -28,8 +28,8 @@ export const canGetById = Joi.object({
 
 export const canUpdate = Joi.object({
   body: Joi.object({
-    postName: Joi.string().trim().optional(),
-    text: Joi.string().trim().min(1).max(POST_TEXT_MAX_LENGTH).optional(),
+    postName: Joi.string().trim(),
+    text: Joi.string().trim().min(1).max(POST_TEXT_MAX_LENGTH),
     media: Joi.string()
       .uri({ scheme: ["http", "https"] }),
   })

@@ -6,7 +6,7 @@ export const serviceInfo = {
     },
     api: "/api/user-service",
   },
-  content: {
+  post: {
     name: "post-service",
     local: {
       port: 3001,

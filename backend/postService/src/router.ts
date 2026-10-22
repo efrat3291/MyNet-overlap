@@ -5,7 +5,7 @@ import { postRouter } from "./post/post.router.js";
 const appRouter: Router = Router();
 
 appRouter.use(
-  `${serviceInfo.content.api}/posts`,
+  `${serviceInfo.post.api}/posts`,
   postRouter
 );
 

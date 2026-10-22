@@ -8,7 +8,7 @@ import type { UpdatePostPayload } from "./post.types.js";
 
 export const postManager = {
   create: async (post: CreatePostPayload): Promise<Post> => {
-    const user = await userService.getUserById(post.userId);
+    const user = await userService.getUserById(post.userId.toString());
 
     if (isNil(user)) {
       const error = new Error("User not found");
@@ -23,12 +23,7 @@ export const postManager = {
 
   getById: postRepository.getById,
 
-  update: async (
-    id: string,
-    post: UpdatePostPayload,
-  ): Promise<Post> => {
-    return await postRepository.update(id, post);
-  },
+  update: postRepository.update,
 
   delete: postRepository.delete,
 };

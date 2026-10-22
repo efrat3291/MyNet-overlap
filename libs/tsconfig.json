@@ -11,5 +11,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/server/db.ts", "src/server/startServer.ts", "src/server/serviceInfo.ts"]
 }

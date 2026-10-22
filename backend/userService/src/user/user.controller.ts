@@ -11,9 +11,9 @@ export const userController = {
   },
 
   getById: async (
-    req: Request<{ userId: string }>,
+    req: Request<{ id: string }>,
     res: Response,
   ): Promise<void> => {
-    res.status(200).json(await userManager.getById(req.params.userId));
+    res.status(200).json(await userManager.getById(req.params.id));
   },
 };
