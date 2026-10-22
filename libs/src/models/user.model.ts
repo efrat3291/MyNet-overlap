@@ -1,6 +1,5 @@
-
-import { Schema, model } from 'mongoose';
-import type { User } from '../types/user.type';
+import { Schema, model } from "mongoose";
+import type { User } from "../types/user/user.type.js";
 
 const userSchema = new Schema<User>({
   username: {
@@ -9,14 +8,14 @@ const userSchema = new Schema<User>({
     unique: true,
     index: true,
     trim: true,
-    minlength: 2,
+    minlength: 1,
   },
   displayedName: {
     type: String,
     required: true,
     trim: true,
-    minlength: 2,
+    minlength: 1,
   },
 });
 
-export const UserModel = model<User>('User', userSchema);
+export const UserModel = model<User>("User", userSchema);
