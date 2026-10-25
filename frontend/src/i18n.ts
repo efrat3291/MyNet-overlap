@@ -11,6 +11,7 @@ i18n.use(initReactI18next).init({
           title: "Users",
           empty: "No users found.",
           loadError: "Failed to load users. Please try again.",
+          retry: "Try again",
         },
         createUser: {
           title: "Create User",
@@ -22,6 +23,8 @@ i18n.use(initReactI18next).init({
           createSuccess: "User created successfully.",
           creating: "Creating...",
           submit: "Create User",
+          usernameMinLength: "Username must contain at least 2 characters.",
+          displayedNameMinLength: "Display name must contain at least 2 characters.",
         },
         posts: {
           title: "Posts",
@@ -33,6 +36,7 @@ i18n.use(initReactI18next).init({
           likes_other: "{{count}} likes",
           searchPlaceholder: "search by post name.",
           searchLabel: "Search posts by name",
+          retry: "Try again",
         },
         createPost: {
           title: "Create Post",
@@ -62,6 +66,7 @@ i18n.use(initReactI18next).init({
           title: "משתמשים",
           empty: "לא נמצאו משתמשים.",
           loadError: "טעינת המשתמשים נכשלה. נסו שוב.",
+          retry: "נסו שוב",
         },
         createUser: {
           title: "יצירת משתמש",
@@ -73,6 +78,8 @@ i18n.use(initReactI18next).init({
           createSuccess: "המשתמש נוצר בהצלחה.",
           creating: "יוצר משתמש...",
           submit: "יצירת משתמש",
+          usernameMinLength: "שם המשתמש חייב להכיל לפחות 2 תווים.",
+          displayedNameMinLength: "שם התצוגה חייב להכיל לפחות 2 תווים.",
         },
         posts: {
           title: "פוסטים",
@@ -84,6 +91,7 @@ i18n.use(initReactI18next).init({
           likes_other: "{{count}} לייקים",
           searchPlaceholder: "חיפוש לפי שם.",
           searchLabel: "חיפוש פוסטים לפי שם",
+          retry: "נסו שוב",
         },
         createPost: {
           title: "יצירת פוסט",

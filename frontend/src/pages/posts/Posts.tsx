@@ -74,7 +74,7 @@ const Post: FC = () => {
           className={classes.retryButton}
           onClick={handleRetry}
         >
-          {t("posts.retry", { defaultValue: "Try again" })}
+          {t("posts.retry")}
         </button>
       </main>
     );
