@@ -1,6 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import "./App.css";
-
 import { CreatePost } from "./pages/createPost";
 import { Navbar } from "./components/navbar/Navbar";
 import { Post } from "./pages/posts";
