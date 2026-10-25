@@ -3,16 +3,26 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ContentLoader from "react-content-loader";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { isEmpty, trim } from "lodash/fp";
 import { useStyles } from "./styles";
 import { userService } from "../../services/user/user.service";
 import type { CreateUserPayload } from "../../services/user/user.service";
 import { QUERY_KEYS } from "../../utils/queryKeys";
+import {
+  getCreateUserValidationRules,
+  normalizeCreateUserPayload,
+} from "./functions";
 
 const CreateUser: FC = () => {
   const classes = useStyles();
   const { t } = useTranslation("translation", {
     keyPrefix: "createUser",
+  });
+
+  const validationRules = getCreateUserValidationRules({
+    usernameRequired: t("usernameRequired"),
+    usernameMinLength: t("usernameMinLength"),
+    displayedNameRequired: t("displayedNameRequired"),
+    displayedNameMinLength: t("displayedNameMinLength"),
   });
 
   const {
@@ -42,20 +52,14 @@ const CreateUser: FC = () => {
         displayedName: "",
       });
 
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.USERS,
       });
     },
   });
 
-  const onSubmit = ({
-    username,
-    displayedName,
-  }: CreateUserPayload): void => {
-    createUser({
-      username: trim(username),
-      displayedName: trim(displayedName),
-    });
+  const onSubmit = (payload: CreateUserPayload): void => {
+    createUser(normalizeCreateUserPayload(payload));
   };
 
   return (
@@ -73,15 +77,7 @@ const CreateUser: FC = () => {
             className={`${classes.input} ${
               errors.username ? classes.inputError : ""
             }`}
-            {...register("username", {
-              required: t("usernameRequired"),
-              validate: (value) =>
-                !isEmpty(trim(value)) || t("usernameRequired"),
-              minLength: {
-                value: 2,
-                message: t("usernameMinLength"),
-              },
-            })}
+            {...register("username", validationRules.username)}
           />
 
           {errors.username && (
@@ -99,15 +95,7 @@ const CreateUser: FC = () => {
             className={`${classes.input} ${
               errors.displayedName ? classes.inputError : ""
             }`}
-            {...register("displayedName", {
-              required: t("displayedNameRequired"),
-              validate: (value) =>
-                !isEmpty(trim(value)) || t("displayedNameRequired"),
-              minLength: {
-                value: 2,
-                message: t("displayedNameMinLength"),
-              },
-            })}
+            {...register("displayedName", validationRules.displayedName)}
           />
 
           {errors.displayedName && (
