@@ -4,10 +4,17 @@ import { initDB } from "./db.js";
 import { config } from "./config.js";
 import { appRouter } from "./router.js";
 import { startServer } from "@libs/startServer.js";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  }),
+);
 
 app.use(appRouter);
 
