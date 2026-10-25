@@ -1,18 +1,19 @@
+
 import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
   container: {
     width: "100%",
-    maxWidth: "1100px",
-    margin: "0 auto",
+    maxWidth: 1100,
+    margin: "40px auto",
     padding: "32px 24px",
     boxSizing: "border-box",
   },
 
   title: {
     margin: "0 0 28px",
-    color: "#1f2937",
-    fontSize: "32px",
+    color: "#282634",
+    fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
   },
@@ -20,7 +21,7 @@ export const useStyles = createUseStyles({
   postsList: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-    gap: "24px",
+    gap: 24,
     alignItems: "stretch",
   },
 
@@ -28,31 +29,31 @@ export const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     minWidth: 0,
-    padding: "24px",
-    border: "1px solid #e5e7eb",
-    borderRadius: "16px",
-    backgroundColor: "#ffffff",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    padding: 24,
+    border: "1px solid #ebe6df",
+    borderRadius: 20,
+    backgroundColor: "#fffefa",
+    boxShadow: "0 8px 28px rgba(50, 44, 61, 0.06)",
+    transition: "transform 180ms ease, box-shadow 180ms ease",
 
     "&:hover": {
       transform: "translateY(-3px)",
-      boxShadow: "0 8px 20px rgba(0, 0, 0, 0.09)",
+      boxShadow: "0 12px 32px rgba(50, 44, 61, 0.1)",
     },
   },
 
   postName: {
     margin: "0 0 12px",
-    color: "#2563eb",
-    fontSize: "22px",
+    color: "#395543",
+    fontSize: 21,
     fontWeight: 700,
     overflowWrap: "anywhere",
   },
 
   postText: {
     margin: "0 0 20px",
-    color: "#4b5563",
-    fontSize: "16px",
+    color: "#454150",
+    fontSize: 15,
     lineHeight: 1.7,
     whiteSpace: "pre-wrap",
     overflowWrap: "anywhere",
@@ -62,12 +63,14 @@ export const useStyles = createUseStyles({
     display: "inline-block",
     alignSelf: "flex-start",
     marginTop: "auto",
-    marginBottom: "16px",
-    color: "#2563eb",
+    marginBottom: 16,
+    color: "#395543",
     fontWeight: 600,
     textDecoration: "none",
+    transition: "color 180ms ease",
 
     "&:hover": {
+      color: "#66856a",
       textDecoration: "underline",
     },
   },
@@ -75,70 +78,89 @@ export const useStyles = createUseStyles({
   likes: {
     display: "flex",
     alignItems: "center",
-    gap: "8px",
+    gap: 8,
     marginTop: "auto",
-    paddingTop: "16px",
-    borderTop: "1px solid #f3f4f6",
-    color: "#6b7280",
-    fontSize: "14px",
+    paddingTop: 16,
+    borderTop: "1px solid #ebe6df",
+    color: "#6d6878",
+    fontSize: 14,
   },
 
   message: {
     padding: "40px 16px",
-    color: "#6b7280",
-    fontSize: "17px",
+    color: "#6d6878",
+    fontSize: 16,
     textAlign: "center",
   },
 
   error: {
-    padding: "20px",
-    border: "1px solid #fecaca",
-    borderRadius: "12px",
-    backgroundColor: "#fef2f2",
-    color: "#b91c1c",
+    padding: 20,
+    border: "1px solid #f0caca",
+    borderRadius: 10,
+    backgroundColor: "#fff0f0",
+    color: "#a52d2d",
+    fontSize: 14,
+    lineHeight: 1.5,
     textAlign: "center",
   },
 
   emptyState: {
     gridColumn: "1 / -1",
     padding: "48px 20px",
-    border: "1px dashed #d1d5db",
-    borderRadius: "16px",
-    color: "#6b7280",
+    border: "1px dashed #dcd7cf",
+    borderRadius: 16,
+    backgroundColor: "#fffefa",
+    color: "#6d6878",
+    fontSize: 15,
     textAlign: "center",
   },
 
   retryButton: {
     display: "block",
     margin: "16px auto 0",
-    padding: "10px 20px",
+    padding: "12px 22px",
     border: "none",
-    borderRadius: "8px",
-    backgroundColor: "#2563eb",
+    borderRadius: 999,
+    backgroundColor: "#395543",
     color: "#ffffff",
-    fontSize: "15px",
-    fontWeight: 600,
+    fontSize: 15,
+    fontWeight: 700,
     cursor: "pointer",
+    transition: "background-color 180ms ease, transform 180ms ease",
 
     "&:hover": {
-      backgroundColor: "#1d4ed8",
+      backgroundColor: "#2d4435",
     },
 
-    retryButton: {
-      display: "block",
-      margin: "16px auto 0",
-      padding: "10px 20px",
-      border: "none",
-      borderRadius: "8px",
-      backgroundColor: "#2563eb",
-      color: "#ffffff",
-      fontSize: "15px",
-      fontWeight: 600,
-      cursor: "pointer",
+    "&:active": {
+      transform: "scale(0.99)",
+    },
+  },
 
-      "&:hover": {
-        backgroundColor: "#1d4ed8",
-      },
+  "@media (max-width: 600px)": {
+    container: {
+      width: "100%",
+      margin: "24px auto",
+      padding: "20px 12px",
+    },
+
+    title: {
+      fontSize: 24,
+      marginBottom: 22,
+    },
+
+    postsList: {
+      gridTemplateColumns: "1fr",
+      gap: 16,
+    },
+
+    postCard: {
+      padding: 20,
+      borderRadius: 14,
+    },
+
+    postName: {
+      fontSize: 19,
     },
   },
 });
