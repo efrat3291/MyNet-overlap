@@ -1,7 +1,22 @@
 import jayson from "jayson/promise/index.js";
-import { rpcServerRequest } from "@libs/rpc/rpc.functions.js";
 import { userManager } from "./user/user.manager.js";
 
 export const rpcServer = new jayson.Server({
-  getUserById: rpcServerRequest(userManager.getById),
+  getUserById: async (params: unknown) => {
+
+    const userId = Array.isArray(params) ? params[0] : params;
+
+    if (typeof userId !== "string") {
+      throw new Error("RPC getUserById expected a string userId");
+    }
+
+    try {
+      const user = await userManager.getById(userId);
+
+      return user;
+    } catch (error: unknown) {
+      console.error("[RPC Server] getUserById failed:", error);
+      throw error;
+    }
+  },
 });

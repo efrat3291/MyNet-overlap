@@ -35,4 +35,4 @@ const Navbar: FC = () => {
   );
 };
 
-export  {Navbar}; ;
+export  { Navbar }; ;
