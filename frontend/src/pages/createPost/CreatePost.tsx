@@ -2,18 +2,29 @@ import type { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ContentLoader from "react-content-loader";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useStyles } from "./styles";
 import type { CreatePostProps } from "./props.types";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { contentService } from "../../services/content/content.service";
 import { QUERY_KEYS } from "../../utils/queryKeys";
 import type { CreatePostPayload } from "@libs/types/post/postPayload.type";
-import { isEmpty, trim } from "lodash/fp";
-import { POST_TEXT_MAX_LENGTH } from "@libs/consts/post.consts";
+import {
+  getCreatePostValidationRules,
+  normalizeCreatePostPayload,
+} from "./functions";
 
 const CreatePost: FC<CreatePostProps> = ({ userId }) => {
   const classes = useStyles();
-  const { t } = useTranslation("translation", { keyPrefix: "createPost" });
+  const { t } = useTranslation("translation", {
+    keyPrefix: "createPost",
+  });
+
+  const validationRules = getCreatePostValidationRules({
+    postNameRequired: t("postNameRequired"),
+    textRequired: t("textRequired"),
+    textMaxLength: t("textMaxLength"),
+    mediaInvalid: t("mediaInvalid"),
+  });
 
   const {
     register,
@@ -45,24 +56,15 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
         text: "",
         media: "",
       });
-      queryClient.invalidateQueries({
+
+      void queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.POSTS,
       });
     },
   });
 
-  const onSubmit = ({
-    postName,
-    text,
-    userId,
-    media,
-  }: CreatePostPayload): void => {
-    createPost({
-      postName: trim(postName),
-      text: trim(text),
-      userId,
-      ...(media && trim(media) && { media: trim(media) }),
-    });
+  const onSubmit = (payload: CreatePostPayload): void => {
+    createPost(normalizeCreatePostPayload(payload));
   };
 
   return (
@@ -80,11 +82,7 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
             className={`${classes.input} ${
               errors.postName ? classes.inputError : ""
             }`}
-            {...register("postName", {
-              required: t("postNameRequired"),
-              validate: (value) =>
-                !isEmpty(trim(value)) || t("postNameRequired"),
-            })}
+            {...register("postName", validationRules.postName)}
           />
 
           {errors.postName && (
@@ -102,15 +100,7 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
             className={`${classes.textarea} ${
               errors.text ? classes.inputError : ""
             }`}
-            {...register("text", {
-              required: t("textRequired"),
-              validate: {
-                notEmpty: (value) =>
-                  !isEmpty(trim(value)) || t("textRequired"),
-                maxLength: (value) =>
-                  value.length <= POST_TEXT_MAX_LENGTH || t("textMaxLength"),
-              },
-            })}
+            {...register("text", validationRules.text)}
           />
 
           {errors.text && (
@@ -128,10 +118,7 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
             className={`${classes.input} ${
               errors.media ? classes.inputError : ""
             }`}
-            {...register("media", {
-              validate: (value) =>
-                !value || /^https?:\/\/.+/.test(value) || t("mediaInvalid"),
-            })}
+            {...register("media", validationRules.media)}
           />
 
           {errors.media && (
@@ -151,7 +138,11 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
           </p>
         )}
 
-        <button className={classes.button} type="submit" disabled={isPending}>
+        <button
+          className={classes.button}
+          type="submit"
+          disabled={isPending}
+        >
           {isPending ? t("creating") : t("submit")}
         </button>
 
