@@ -8,26 +8,36 @@ const Navbar: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const handleNavigate = (path: string): void => {
+    navigate(path);
+  };
+
   return (
     <nav className={classes.navbar}>
-      <button className={classes.link} onClick={() => navigate("/users")}>
+      <button
+        className={classes.link}
+        onClick={() => handleNavigate("/users")}
+      >
         {t("navbar.users")}
       </button>
 
       <button
         className={classes.link}
-        onClick={() => navigate("/users/create")}
+        onClick={() => handleNavigate("/users/create")}
       >
         {t("navbar.createUser")}
       </button>
 
-      <button className={classes.link} onClick={() => navigate("/posts")}>
+      <button
+        className={classes.link}
+        onClick={() => handleNavigate("/posts")}
+      >
         {t("navbar.posts")}
       </button>
 
       <button
         className={classes.link}
-        onClick={() => navigate("/posts/create")}
+        onClick={() => handleNavigate("/posts/create")}
       >
         {t("navbar.createPost")}
       </button>
@@ -35,4 +45,4 @@ const Navbar: FC = () => {
   );
 };
 
-export  { Navbar }; ;
+export { Navbar };
