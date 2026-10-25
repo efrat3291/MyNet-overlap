@@ -1,5 +1,5 @@
-
-import type { FC } from "react";
+import { useMemo, useState } from "react";
+import type { FC, ChangeEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import ContentLoader from "react-content-loader";
@@ -10,6 +10,7 @@ import { useStyles } from "./styles";
 const Post: FC = () => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const {
     data: posts,
@@ -20,6 +21,24 @@ const Post: FC = () => {
     queryKey: QUERY_KEYS.POSTS,
     queryFn: contentService.getPosts,
   });
+
+  const filteredPosts = useMemo(() => {
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+
+    return (posts ?? []).filter((post) =>
+      post.postName.toLowerCase().startsWith(normalizedSearch),
+    );
+  }, [posts, searchTerm]);
+
+  const handleSearchChange = (
+  event: ChangeEvent<HTMLInputElement>,
+) => {
+  setSearchTerm(event.target.value);
+};
+
+  const handleRetry = () => {
+    void refetch();
+  };
 
   if (isPending) {
     return (
@@ -53,7 +72,7 @@ const Post: FC = () => {
         <button
           type="button"
           className={classes.retryButton}
-          onClick={() => refetch()}
+          onClick={handleRetry}
         >
           {t("posts.retry", { defaultValue: "Try again" })}
         </button>
@@ -65,11 +84,30 @@ const Post: FC = () => {
     <main className={classes.container}>
       <h1 className={classes.title}>{t("posts.title")}</h1>
 
+      <input
+        type="search"
+        className={classes.searchInput}
+        value={searchTerm}
+        onChange={handleSearchChange}
+        placeholder={t("posts.searchPlaceholder", {
+          defaultValue: "Search posts by name...",
+        })}
+        aria-label={t("posts.searchLabel", {
+          defaultValue: "Search posts by name",
+        })}
+      />
+
       {posts.length === 0 ? (
         <p className={classes.emptyState}>{t("posts.empty")}</p>
+      ) : filteredPosts.length === 0 ? (
+        <p className={classes.emptyState}>
+          {t("posts.noSearchResults", {
+            defaultValue: "No posts match your search.",
+          })}
+        </p>
       ) : (
         <div className={classes.postsList}>
-          {posts.map((post) => (
+          {filteredPosts.map((post) => (
             <article
               className={classes.postCard}
               key={post._id.toString()}

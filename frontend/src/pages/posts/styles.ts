@@ -1,4 +1,3 @@
-
 import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
@@ -115,6 +114,18 @@ export const useStyles = createUseStyles({
     textAlign: "center",
   },
 
+   searchInput: {
+      width: "100%",
+      maxWidth: "32rem",
+      boxSizing: "border-box",
+      padding: "0.75rem 1rem",
+      marginBottom: "1.5rem",
+      border: "1px solid #d1d5db",
+      borderRadius: "0.5rem",
+      fontSize: "1rem",
+      outlineOffset: "2px",
+    },
+
   retryButton: {
     display: "block",
     margin: "16px auto 0",
@@ -162,5 +173,6 @@ export const useStyles = createUseStyles({
     postName: {
       fontSize: 19,
     },
+
   },
 });

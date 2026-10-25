@@ -32,6 +32,7 @@ i18n.use(initReactI18next).init({
           likes_one: "{{count}} like",
           likes_other: "{{count}} likes",
           searchPlaceholder: "search by post name.",
+          searchLabel: "Search posts by name",
         },
         createPost: {
           title: "Create Post",
@@ -82,6 +83,7 @@ i18n.use(initReactI18next).init({
           likes_one: "{{count}} לייק",
           likes_other: "{{count}} לייקים",
           searchPlaceholder: "חיפוש לפי שם.",
+          searchLabel: "חיפוש פוסטים לפי שם",
         },
         createPost: {
           title: "יצירת פוסט",
