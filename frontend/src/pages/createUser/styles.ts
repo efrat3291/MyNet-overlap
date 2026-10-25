@@ -1,3 +1,4 @@
+
 import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
@@ -31,6 +32,7 @@ export const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     gap: 8,
+    minWidth: 0,
   },
 
   label: {
@@ -41,6 +43,7 @@ export const useStyles = createUseStyles({
 
   input: {
     width: "100%",
+    minWidth: 0,
     padding: "12px 14px",
     boxSizing: "border-box",
     border: "1px solid #dcd7cf",
@@ -138,6 +141,25 @@ export const useStyles = createUseStyles({
     title: {
       fontSize: 24,
       marginBottom: 22,
+    },
+
+    form: {
+      gap: 18,
+    },
+  },
+
+  "@media (max-width: 360px)": {
+    createUser: {
+      width: "calc(100% - 16px)",
+      padding: 14,
+    },
+
+    title: {
+      fontSize: 21,
+    },
+
+    input: {
+      padding: "10px 12px",
     },
   },
 });

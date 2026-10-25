@@ -1,3 +1,4 @@
+
 import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
@@ -114,17 +115,19 @@ export const useStyles = createUseStyles({
     textAlign: "center",
   },
 
-   searchInput: {
-      width: "100%",
-      maxWidth: "32rem",
-      boxSizing: "border-box",
-      padding: "0.75rem 1rem",
-      marginBottom: "1.5rem",
-      border: "1px solid #d1d5db",
-      borderRadius: "0.5rem",
-      fontSize: "1rem",
-      outlineOffset: "2px",
-    },
+  searchInput: {
+    display: "block",
+    width: "100%",
+    maxWidth: "32rem",
+    minWidth: 0,
+    boxSizing: "border-box",
+    padding: "0.75rem 1rem",
+    marginBottom: "1.5rem",
+    border: "1px solid #d1d5db",
+    borderRadius: "0.5rem",
+    fontSize: "1rem",
+    outlineOffset: "2px",
+  },
 
   retryButton: {
     display: "block",
@@ -150,7 +153,6 @@ export const useStyles = createUseStyles({
 
   "@media (max-width: 600px)": {
     container: {
-      width: "100%",
       margin: "24px auto",
       padding: "20px 12px",
     },
@@ -174,5 +176,23 @@ export const useStyles = createUseStyles({
       fontSize: 19,
     },
 
+    searchInput: {
+      maxWidth: "100%",
+      marginBottom: 20,
+    },
+  },
+
+  "@media (max-width: 360px)": {
+    container: {
+      padding: "16px 8px",
+    },
+
+    postCard: {
+      padding: 14,
+    },
+
+    title: {
+      fontSize: 21,
+    },
   },
 });

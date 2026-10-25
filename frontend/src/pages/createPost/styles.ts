@@ -1,3 +1,4 @@
+
 import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
@@ -5,7 +6,7 @@ export const useStyles = createUseStyles({
     width: "100%",
     maxWidth: 640,
     margin: "40px auto",
-    padding: "32px",
+    padding: 32,
     boxSizing: "border-box",
     backgroundColor: "#fffefa",
     border: "1px solid #ebe6df",
@@ -31,6 +32,7 @@ export const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     gap: 8,
+    minWidth: 0,
   },
 
   label: {
@@ -41,6 +43,7 @@ export const useStyles = createUseStyles({
 
   input: {
     width: "100%",
+    minWidth: 0,
     padding: "12px 14px",
     boxSizing: "border-box",
     border: "1px solid #dcd7cf",
@@ -59,6 +62,7 @@ export const useStyles = createUseStyles({
 
   textarea: {
     width: "100%",
+    minWidth: 0,
     minHeight: 130,
     padding: "12px 14px",
     boxSizing: "border-box",
@@ -158,7 +162,31 @@ export const useStyles = createUseStyles({
     },
 
     title: {
+      marginBottom: 22,
       fontSize: 24,
+    },
+
+    form: {
+      gap: 18,
+    },
+  },
+
+  "@media (max-width: 360px)": {
+    createPost: {
+      width: "calc(100% - 16px)",
+      padding: 14,
+    },
+
+    title: {
+      fontSize: 21,
+    },
+
+    input: {
+      padding: "10px 12px",
+    },
+
+    textarea: {
+      padding: "10px 12px",
     },
   },
 });
