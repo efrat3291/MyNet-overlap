@@ -5,6 +5,7 @@ export const serviceInfo = {
       port: 3000,
     },
     api: "/api/user-service",
+    env: "http://localhost:",
   },
   content: {
     name: "content-service",
@@ -12,5 +13,6 @@ export const serviceInfo = {
       port: 3001,
     },
     api: "/api/content-service",
+    env: "http://localhost:",
   },
 };
