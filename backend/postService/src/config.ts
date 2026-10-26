@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { serviceInfo } from "@libs/serviceInfo.js";
+import { serviceInfo } from "@libs/server/serviceInfo.js";
 
 const { MONGO_URI, RPC_HOSTNAME } = process.env;
 
@@ -16,7 +16,7 @@ export const config = {
     mongoUri: MONGO_URI,
   },
   server: {
-    port: serviceInfo.content.local.port,
+    port: serviceInfo.post.local.port,
   },
   rpc: {
     host: RPC_HOSTNAME,

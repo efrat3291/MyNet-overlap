@@ -2,15 +2,7 @@ import { userRepository } from "./user.repository.js";
 import type { User } from "@libs/types/user/user.type.js";
 
 export const userManager = {
-  create: async (user: User): Promise<User> => {
-    const input: User = {
-      ...user,
-      username: user.username.trim(),
-      displayedName: user.displayedName.trim(),
-    };
-
-    return await userRepository.create(input);
-  },
+  create: userRepository.create,
 
   getAll: userRepository.getAll,
 

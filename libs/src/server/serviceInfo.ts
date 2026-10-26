@@ -7,8 +7,8 @@ export const serviceInfo = {
     api: "/api/user-service",
     env: "http://localhost:",
   },
-  content: {
-    name: "content-service",
+  post: {
+    name: "post-service",
     local: {
       port: 3001,
     },

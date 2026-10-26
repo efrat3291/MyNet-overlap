@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { serviceInfo } from "@libs/serviceInfo.js";
-import { createUserRouter } from "./user/user.router.js";
+import { serviceInfo } from "@libs/server/serviceInfo.js";
+import { userRouter } from "./user/user.router.js";
 
 const appRouter: Router = Router();
 
 appRouter.use(
   `${serviceInfo.user.api}/users`,
-  createUserRouter(),
+  userRouter,
 );
 
 export { appRouter };
