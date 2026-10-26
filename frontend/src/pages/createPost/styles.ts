@@ -1,5 +1,5 @@
-
 import { createUseStyles } from "react-jss";
+import { down } from "../../styles/breakpoints";
 
 export const useStyles = createUseStyles({
   createPost: {
@@ -153,7 +153,7 @@ export const useStyles = createUseStyles({
     overflow: "hidden",
   },
 
-  "@media (max-width: 600px)": {
+  [down("phone")]: {
     createPost: {
       width: "calc(100% - 24px)",
       margin: "24px auto",
@@ -171,7 +171,7 @@ export const useStyles = createUseStyles({
     },
   },
 
-  "@media (max-width: 360px)": {
+  [down("smallPhone")]: {
     createPost: {
       width: "calc(100% - 16px)",
       padding: 14,

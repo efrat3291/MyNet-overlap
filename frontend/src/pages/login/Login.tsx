@@ -24,7 +24,6 @@ export const Login = () => {
 
       navigate("/posts");
     } catch {
-      // הצגת הודעת שגיאה למשתמש תתווסף בשלב הבא.
     }
   };
 

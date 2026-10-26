@@ -1,5 +1,5 @@
-
 import { createUseStyles } from "react-jss";
+import { down } from "../../styles/breakpoints";
 
 export const useStyles = createUseStyles({
   users: {
@@ -78,8 +78,8 @@ export const useStyles = createUseStyles({
     fontSize: 16,
   },
 
-  "@media (max-width: 600px)": {
-    container: {
+  [down("phone")]: {
+    users: {
       margin: "24px auto",
       padding: "0 12px",
     },
@@ -89,7 +89,7 @@ export const useStyles = createUseStyles({
       marginBottom: 22,
     },
 
-    list: {
+    userList: {
       gridTemplateColumns: "1fr",
       gap: 16,
     },
@@ -99,8 +99,8 @@ export const useStyles = createUseStyles({
     },
   },
 
-  "@media (max-width: 360px)": {
-    container: {
+  [down("smallPhone")]: {
+    users: {
       padding: "0 8px",
     },
 

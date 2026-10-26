@@ -1,5 +1,5 @@
-
 import { createUseStyles } from "react-jss";
+import { down } from "../../styles/breakpoints";
 
 export const useStyles = createUseStyles({
   posts: {
@@ -144,8 +144,8 @@ export const useStyles = createUseStyles({
     },
   },
 
-  "@media (max-width: 600px)": {
-    container: {
+  [down("phone")]: {
+    posts: {
       margin: "24px auto",
       padding: "20px 12px",
     },
@@ -175,8 +175,8 @@ export const useStyles = createUseStyles({
     },
   },
 
-  "@media (max-width: 360px)": {
-    container: {
+  [down("smallPhone")]: {
+    posts: {
       padding: "16px 8px",
     },
 
