@@ -1,12 +1,18 @@
-import { serviceInfo } from "@libs/serviceInfo";
+import { serviceInfo } from "@libs/server/serviceInfo";
 
 export const config = {
   services: {
     user: {
-      baseURL: `${serviceInfo.user.env}${serviceInfo.user.local.port}${serviceInfo.user.api}`,
+      baseURL:
+        serviceInfo.user.env === "local"
+          ? `http://localhost:${serviceInfo.user.local.port}${serviceInfo.user.api}`
+          : serviceInfo.user.api,
     },
     content: {
-      baseURL: `${serviceInfo.content.env}${serviceInfo.content.local.port}${serviceInfo.content.api}`,
+      baseURL:
+        serviceInfo.post.env === "local"
+          ? `http://localhost:${serviceInfo.post.local.port}${serviceInfo.post.api}`
+          : serviceInfo.post.api,
     },
   },
 };

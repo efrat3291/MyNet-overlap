@@ -2,7 +2,7 @@
 import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
-  container: {
+  posts: {
     width: "100%",
     maxWidth: 1100,
     margin: "40px auto",
@@ -18,7 +18,7 @@ export const useStyles = createUseStyles({
     textAlign: "center",
   },
 
-  postsList: {
+  postList: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
     gap: 24,
@@ -84,13 +84,6 @@ export const useStyles = createUseStyles({
     borderTop: "1px solid #ebe6df",
     color: "#6d6878",
     fontSize: 14,
-  },
-
-  message: {
-    padding: "40px 16px",
-    color: "#6d6878",
-    fontSize: 16,
-    textAlign: "center",
   },
 
   error: {
@@ -162,7 +155,7 @@ export const useStyles = createUseStyles({
       marginBottom: 22,
     },
 
-    postsList: {
+    postList: {
       gridTemplateColumns: "1fr",
       gap: 16,
     },

@@ -3,46 +3,43 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useStyles } from "./styles";
 
-const Navbar: FC = () => {
+export const Navbar: FC = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
-  const handleNavigate = (path: string): void => {
-    navigate(path);
-  };
+  const { t } = useTranslation("translation", {
+    keyPrefix: "NAVBAR",
+  });
 
   return (
     <nav className={classes.navbar}>
       <button
         className={classes.link}
-        onClick={() => handleNavigate("/users")}
+        onClick={() => navigate("/users")}
       >
-        {t("navbar.users")}
+        {t("USERS")}
       </button>
 
       <button
         className={classes.link}
-        onClick={() => handleNavigate("/users/create")}
+        onClick={() => navigate("/users/create")}
       >
-        {t("navbar.createUser")}
+        {t("CREATE_USER")}
       </button>
 
       <button
         className={classes.link}
-        onClick={() => handleNavigate("/posts")}
+        onClick={() => navigate("/posts")}
       >
-        {t("navbar.posts")}
+        {t("POSTS")}
       </button>
 
       <button
         className={classes.link}
-        onClick={() => handleNavigate("/posts/create")}
+        onClick={() => navigate("/posts/create")}
       >
-        {t("navbar.createPost")}
+        {t("CREATE_POST")}
       </button>
     </nav>
   );
 };
-
-export { Navbar };

@@ -1,19 +1,31 @@
-import { useMemo, useState } from "react";
-import type { FC, ChangeEvent } from "react";
+import { useState } from "react";
+import type { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import ContentLoader from "react-content-loader";
+import {
+  filter,
+  startsWith,
+  toLower,
+  trim,
+  isEmpty,
+  map,
+  times,
+} from "lodash/fp";
 import { contentService } from "../../services/content/content.service";
 import { QUERY_KEYS } from "../../utils/queryKeys";
 import { useStyles } from "./styles";
+import { PostCard } from "./postCard/PostCard";
 
 const Post: FC = () => {
   const classes = useStyles();
-  const { t } = useTranslation();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "POSTS",
+  });
   const [searchTerm, setSearchTerm] = useState("");
 
   const {
-    data: posts,
+    data: posts = [],
     isPending,
     isError,
     refetch,
@@ -21,122 +33,85 @@ const Post: FC = () => {
     queryKey: QUERY_KEYS.POSTS,
     queryFn: contentService.getPosts,
   });
+  console.log("Posts:", posts);
+  console.log("First post:", posts[0]);
 
-  const filteredPosts = useMemo(() => {
-    const normalizedSearch = searchTerm.trim().toLowerCase();
+  const normalizedSearch = toLower(trim(searchTerm));
 
-    return (posts ?? []).filter((post) =>
-      post.postName.toLowerCase().startsWith(normalizedSearch),
-    );
-  }, [posts, searchTerm]);
-
-  const handleSearchChange = (
-  event: ChangeEvent<HTMLInputElement>,
-) => {
-  setSearchTerm(event.target.value);
-};
+  const filteredPosts = filter(
+    ({ postName }) => startsWith(normalizedSearch, toLower(postName)),
+    posts,
+  );
 
   const handleRetry = () => {
     void refetch();
   };
 
-  if (isPending) {
-    return (
-      <main className={classes.container}>
-        <h1 className={classes.title}>{t("posts.title")}</h1>
-
-        <ContentLoader
-          speed={1.5}
-          width="100%"
-          height={150}
-          viewBox="0 0 400 150"
-          backgroundColor="#f3f4f6"
-          foregroundColor="#e5e7eb"
-        >
-          <rect x="0" y="0" rx="8" ry="8" width="400" height="18" />
-          <rect x="0" y="30" rx="5" ry="5" width="320" height="12" />
-          <rect x="0" y="55" rx="5" ry="5" width="380" height="12" />
-          <rect x="0" y="90" rx="8" ry="8" width="400" height="50" />
-        </ContentLoader>
-      </main>
-    );
-  }
-
-  if (isError) {
-    return (
-      <main className={classes.container}>
-        <h1 className={classes.title}>{t("posts.title")}</h1>
-
-        <p className={classes.error}>{t("posts.loadError")}</p>
-
-        <button
-          type="button"
-          className={classes.retryButton}
-          onClick={handleRetry}
-        >
-          {t("posts.retry")}
-        </button>
-      </main>
-    );
-  }
-
   return (
-    <main className={classes.container}>
-      <h1 className={classes.title}>{t("posts.title")}</h1>
+    <div className={classes.posts}>
+      <h1 className={classes.title}>{t("TITLE")}</h1>
 
-      <input
-        type="search"
-        className={classes.searchInput}
-        value={searchTerm}
-        onChange={handleSearchChange}
-        placeholder={t("posts.searchPlaceholder", {
-          defaultValue: "Search posts by name...",
-        })}
-        aria-label={t("posts.searchLabel", {
-          defaultValue: "Search posts by name",
-        })}
-      />
-
-      {posts.length === 0 ? (
-        <p className={classes.emptyState}>{t("posts.empty")}</p>
-      ) : filteredPosts.length === 0 ? (
-        <p className={classes.emptyState}>
-          {t("posts.noSearchResults", {
-            defaultValue: "No posts match your search.",
-          })}
-        </p>
-      ) : (
-        <div className={classes.postsList}>
-          {filteredPosts.map((post) => (
-            <article
-              className={classes.postCard}
-              key={post._id.toString()}
-            >
-              <h2 className={classes.postName}>{post.postName}</h2>
-
-              <p className={classes.postText}>{post.text}</p>
-
-              {post.media && (
-                <a
-                  className={classes.mediaLink}
-                  href={post.media}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t("posts.viewMedia")}
-                </a>
-              )}
-
-              <div className={classes.likes}>
-                <span>
-                  {t("posts.likes", { count: post.likes ?? 0 })}
-                </span>
-              </div>
-            </article>
-          ))}
+      {isPending ? (
+        <div className={classes.postList}>
+          {times(
+            (index) => (
+              <ContentLoader
+                key={index}
+                speed={1.5}
+                width="100%"
+                height={100}
+                viewBox="0 0 400 100"
+                backgroundColor="#f3f4f6"
+                foregroundColor="#e5e7eb"
+              >
+                <rect x="0" y="0" rx="8" ry="8" width="400" height="18" />
+                <rect x="0" y="30" rx="5" ry="5" width="320" height="12" />
+                <rect x="0" y="55" rx="5" ry="5" width="200" height="12" />
+              </ContentLoader>
+            ),
+            3,
+          )}
         </div>
+      ) : isError ? (
+        <>
+          <p className={classes.error}>{t("LOAD_ERROR")}</p>
+
+          <button
+            type="button"
+            className={classes.retryButton}
+            onClick={handleRetry}
+          >
+            {t("RETRY")}
+          </button>
+        </>
+      ) : (
+        <>
+          <input
+            type="search"
+            className={classes.searchInput}
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            placeholder={t("SEARCH_PLACEHOLDER")}
+            aria-label={t("SEARCH_LABEL")}
+          />
+
+          {isEmpty(posts) ? (
+            <p className={classes.emptyState}>{t("EMPTY")}</p>
+          ) : isEmpty(filteredPosts) ? (
+            <p className={classes.emptyState}>{t("NO_SEARCH_RESULTS")}</p>
+          ) : (
+            <div className={classes.postList}>
+              {map(
+                (post) => (
+                  <PostCard post={post} key={String(post._id)} />
+                ),
+                filteredPosts,
+              )}
+            </div>
+          )}
+        </>
       )}
-    </main>
+    </div>
   );
 };
 

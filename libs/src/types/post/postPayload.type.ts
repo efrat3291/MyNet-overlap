@@ -1,4 +1,4 @@
-import type { Post } from "@libs/types/post/post.type.js";
+import type { Post } from "./post.type.js";
 
 export type CreatePostPayload = Pick<
   Post,

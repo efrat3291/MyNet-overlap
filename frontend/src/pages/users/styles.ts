@@ -2,7 +2,7 @@
 import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
-  container: {
+  users: {
     width: "100%",
     maxWidth: 1000,
     margin: "40px auto",
@@ -18,7 +18,7 @@ export const useStyles = createUseStyles({
     textAlign: "center",
   },
 
-  list: {
+  userList: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
     gap: 20,
@@ -51,11 +51,6 @@ export const useStyles = createUseStyles({
 
   error: {
     color: "#c03939",
-    textAlign: "center",
-  },
-
-  message: {
-    color: "#66616f",
     textAlign: "center",
   },
 

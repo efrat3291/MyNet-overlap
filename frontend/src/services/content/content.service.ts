@@ -7,19 +7,19 @@ import { contentAxios } from "../axios";
 
 export const contentService = {
   createPost: async (payload: CreatePostPayload): Promise<Post> => {
-    const response = await contentAxios.post<Post>("/posts", payload);
+    const response = await contentAxios.post("/posts", payload);
 
     return response.data;
   },
 
   getPosts: async (): Promise<Post[]> => {
-    const response = await contentAxios.get<Post[]>("/posts");
+    const response = await contentAxios.get("/posts");
 
     return response.data;
   },
 
   getPostById: async (id: string): Promise<Post> => {
-    const response = await contentAxios.get<Post>(`/posts/${id}`);
+    const response = await contentAxios.get(`/posts/${id}`);
 
     return response.data;
   },
@@ -28,13 +28,13 @@ export const contentService = {
     id: string,
     payload: UpdatePostPayload,
   ): Promise<Post> => {
-    const response = await contentAxios.patch<Post>(`/posts/${id}`, payload);
+    const response = await contentAxios.patch(`/posts/${id}`, payload);
 
     return response.data;
   },
 
   deletePost: async (id: string): Promise<Post> => {
-    const response = await contentAxios.delete<Post>(`/posts/${id}`);
+    const response = await contentAxios.delete(`/posts/${id}`);
 
     return response.data;
   },

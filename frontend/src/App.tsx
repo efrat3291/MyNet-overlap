@@ -1,9 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { CreatePost } from "./pages/createPost";
+import { CreatePost } from "./pages/createPost/CreatePost";
 import { Navbar } from "./components/navbar/Navbar";
-import { Post } from "./pages/posts";
-import { CreateUser } from "./pages/createUser";
-import { Users } from "./pages/users";
+import { Post } from "./pages/posts/Posts";
+import { CreateUser } from "./pages/createUser/CreateUser";
+import { Users } from "./pages/users/Users";
+import { Login } from "./pages/login/Login";
 
 const App = () => {
   return (
@@ -11,6 +12,8 @@ const App = () => {
       <Navbar />
 
       <Routes>
+        <Route path="/login" element={<Login />} />
+
         <Route path="/" element={<Navigate to="/posts" replace />} />
 
         <Route path="/posts" element={<Post />} />

@@ -3,26 +3,18 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import ContentLoader from "react-content-loader";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { isEmpty, trim } from "lodash/fp";
+import { USER_NAME_MIN_LENGTH } from "@libs/consts/user.consts";
 import { useStyles } from "./styles";
 import { userService } from "../../services/user/user.service";
 import type { CreateUserPayload } from "../../services/user/user.service";
 import { QUERY_KEYS } from "../../utils/queryKeys";
-import {
-  getCreateUserValidationRules,
-  normalizeCreateUserPayload,
-} from "./functions";
 
 const CreateUser: FC = () => {
   const classes = useStyles();
-  const { t } = useTranslation("translation", {
-    keyPrefix: "createUser",
-  });
 
-  const validationRules = getCreateUserValidationRules({
-    usernameRequired: t("usernameRequired"),
-    usernameMinLength: t("usernameMinLength"),
-    displayedNameRequired: t("displayedNameRequired"),
-    displayedNameMinLength: t("displayedNameMinLength"),
+  const { t } = useTranslation("translation", {
+    keyPrefix: "CREATE_USER",
   });
 
   const {
@@ -46,30 +38,33 @@ const CreateUser: FC = () => {
     isSuccess,
   } = useMutation({
     mutationFn: userService.createUser,
-    onSuccess: () => {
+    onSuccess: async () => {
       reset({
         username: "",
         displayedName: "",
       });
 
-      void queryClient.invalidateQueries({
+      await queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.USERS,
       });
     },
   });
 
   const onSubmit = (payload: CreateUserPayload): void => {
-    createUser(normalizeCreateUserPayload(payload));
+    createUser({
+      username: trim(payload.username),
+      displayedName: trim(payload.displayedName),
+    });
   };
 
   return (
     <div className={classes.createUser}>
-      <h1 className={classes.title}>{t("title")}</h1>
+      <h1 className={classes.title}>{t("TITLE")}</h1>
 
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={classes.field}>
           <label className={classes.label} htmlFor="username">
-            {t("username")}
+            {t("USERNAME")}
           </label>
 
           <input
@@ -77,7 +72,14 @@ const CreateUser: FC = () => {
             className={`${classes.input} ${
               errors.username ? classes.inputError : ""
             }`}
-            {...register("username", validationRules.username)}
+            {...register("username", {
+              validate: (value: string) =>
+                !isEmpty(trim(value)) || t("USERNAME_REQUIRED"),
+              minLength: {
+                value: USER_NAME_MIN_LENGTH,
+                message: t("USERNAME_MIN_LENGTH"),
+              },
+            })}
           />
 
           {errors.username && (
@@ -87,7 +89,7 @@ const CreateUser: FC = () => {
 
         <div className={classes.field}>
           <label className={classes.label} htmlFor="displayedName">
-            {t("displayedName")}
+            {t("DISPLAYED_NAME")}
           </label>
 
           <input
@@ -95,7 +97,14 @@ const CreateUser: FC = () => {
             className={`${classes.input} ${
               errors.displayedName ? classes.inputError : ""
             }`}
-            {...register("displayedName", validationRules.displayedName)}
+            {...register("displayedName", {
+              validate: (value: string) =>
+                !isEmpty(trim(value)) || t("DISPLAYED_NAME_REQUIRED"),
+              minLength: {
+                value: USER_NAME_MIN_LENGTH,
+                message: t("DISPLAYED_NAME_MIN_LENGTH"),
+              },
+            })}
           />
 
           {errors.displayedName && (
@@ -107,13 +116,13 @@ const CreateUser: FC = () => {
 
         {isError && (
           <p className={classes.serverError} role="alert">
-            {t("createError")}
+            {t("CREATE_ERROR")}
           </p>
         )}
 
         {isSuccess && (
           <p className={classes.success} role="status">
-            {t("createSuccess")}
+            {t("CREATE_SUCCESS")}
           </p>
         )}
 
@@ -122,7 +131,7 @@ const CreateUser: FC = () => {
           type="submit"
           disabled={isPending}
         >
-          {isPending ? t("creating") : t("submit")}
+          {isPending ? t("CREATING") : t("SUBMIT")}
         </button>
 
         {isPending && (
@@ -135,7 +144,14 @@ const CreateUser: FC = () => {
               backgroundColor="#f3f4f6"
               foregroundColor="#e5e7eb"
             >
-              <rect x="0" y="6" rx="4" ry="4" width="400" height="12" />
+              <rect
+                x="0"
+                y="6"
+                rx="4"
+                ry="4"
+                width="400"
+                height="12"
+              />
             </ContentLoader>
           </div>
         )}

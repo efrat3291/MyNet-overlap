@@ -1,18 +1,18 @@
 export const serviceInfo = {
   user: {
     name: "user-service",
+    env: "local",
     local: {
       port: 3000,
     },
     api: "/api/user-service",
-    env: "http://localhost:",
   },
   post: {
     name: "post-service",
+    env: "local",
     local: {
       port: 3001,
     },
-    api: "/api/content-service",
-    env: "http://localhost:",
+    api: "/api/post-service",
   },
 };
