@@ -1,4 +1,5 @@
 import { createUseStyles } from "react-jss";
+import { down } from "../../styles/breakpoints";
 
 export const useStyles = createUseStyles({
   navbar: {
@@ -37,9 +38,9 @@ export const useStyles = createUseStyles({
     },
   },
 
-  "@media (max-width: 600px)": {
+  [down("phone")]: {
     navbar: {
-      padding: "16px",
+      padding: 16,
       gap: 8,
     },
 

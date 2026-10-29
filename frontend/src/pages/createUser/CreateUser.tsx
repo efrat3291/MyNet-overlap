@@ -4,7 +4,10 @@ import { useTranslation } from "react-i18next";
 import ContentLoader from "react-content-loader";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { isEmpty, trim } from "lodash/fp";
-import { USER_NAME_MIN_LENGTH } from "@libs/consts/user.consts";
+import {
+  USER_NAME_MIN_LENGTH,
+  DISPLAYED_NAME_MIN_LENGTH,
+} from "@libs/consts/user.consts";
 import { useStyles } from "./styles";
 import { userService } from "../../services/user/user.service";
 import type { CreateUserPayload } from "../../services/user/user.service";
@@ -77,7 +80,9 @@ const CreateUser: FC = () => {
                 !isEmpty(trim(value)) || t("USERNAME_REQUIRED"),
               minLength: {
                 value: USER_NAME_MIN_LENGTH,
-                message: t("USERNAME_MIN_LENGTH"),
+                message: t("USERNAME_MIN_LENGTH", {
+                  maxLength: USER_NAME_MIN_LENGTH,
+                }),
               },
             })}
           />
@@ -102,15 +107,15 @@ const CreateUser: FC = () => {
                 !isEmpty(trim(value)) || t("DISPLAYED_NAME_REQUIRED"),
               minLength: {
                 value: USER_NAME_MIN_LENGTH,
-                message: t("DISPLAYED_NAME_MIN_LENGTH"),
+                message: t("DISPLAYED_NAME_MIN_LENGTH", {
+                  maxLength: DISPLAYED_NAME_MIN_LENGTH,
+                }),
               },
             })}
           />
 
           {errors.displayedName && (
-            <p className={classes.error}>
-              {errors.displayedName.message}
-            </p>
+            <p className={classes.error}>{errors.displayedName.message}</p>
           )}
         </div>
 
@@ -126,11 +131,7 @@ const CreateUser: FC = () => {
           </p>
         )}
 
-        <button
-          className={classes.button}
-          type="submit"
-          disabled={isPending}
-        >
+        <button className={classes.button} type="submit" disabled={isPending}>
           {isPending ? t("CREATING") : t("SUBMIT")}
         </button>
 
@@ -144,14 +145,7 @@ const CreateUser: FC = () => {
               backgroundColor="#f3f4f6"
               foregroundColor="#e5e7eb"
             >
-              <rect
-                x="0"
-                y="6"
-                rx="4"
-                ry="4"
-                width="400"
-                height="12"
-              />
+              <rect x="0" y="6" rx="4" ry="4" width="400" height="12" />
             </ContentLoader>
           </div>
         )}

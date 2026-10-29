@@ -1,23 +1,15 @@
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
-import type { contentService } from "../../../services/content/content.service";
-import { useStyles } from "../styles";
+import { useStyles } from "./styles";
+import type { PostCardProps } from "./types";
 
-type PostData = Awaited<
-  ReturnType<typeof contentService.getPosts>
->[number];
-
-type PostCardProps = {
-  post: PostData;
-};
-
-const PostCard: FC<PostCardProps> = ({ post }) => {
+const PostCard: FC<PostCardProps> = ({
+  post: { postName, text, media, likes = 0 },
+}) => {
   const classes = useStyles();
   const { t } = useTranslation("translation", {
     keyPrefix: "POSTS",
   });
-
-  const { postName, text, media, likes } = post;
 
   return (
     <article className={classes.postCard}>
@@ -37,7 +29,7 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
       )}
 
       <div className={classes.likes}>
-        <span>{t("LIKES", { count: likes ?? 0 })}</span>
+        {t("LIKES", { count: likes })}
       </div>
     </article>
   );

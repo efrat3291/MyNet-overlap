@@ -1,4 +1,3 @@
-
 {
   "USERS": {
     "TITLE": "משתמשים",
@@ -16,8 +15,8 @@
     "CREATE_SUCCESS": "המשתמש נוצר בהצלחה.",
     "CREATING": "יוצר משתמש...",
     "SUBMIT": "יצירת משתמש",
-    "USERNAME_MIN_LENGTH": "שם המשתמש חייב להכיל לפחות 2 תווים.",
-    "DISPLAYED_NAME_MIN_LENGTH": "שם התצוגה חייב להכיל לפחות 2 תווים."
+    "USERNAME_MIN_LENGTH": "שם המשתמש חייב להכיל לפחות {{maxLength}} תווים.",
+    "DISPLAYED_NAME_MIN_LENGTH": "שם התצוגה חייב להכיל לפחות {{maxLength}} תווים."
   },
   "POSTS": {
     "TITLE": "פוסטים",
@@ -25,11 +24,10 @@
     "NO_SEARCH_RESULTS": "לא נמצאו פוסטים שמתאימים לחיפוש זה.",
     "EMPTY": "לא נמצאו פוסטים.",
     "VIEW_MEDIA": "צפייה במדיה",
-    "LIKES_one": "{{count}} לייק",
-    "LIKES_other": "{{count}} לייקים",
     "SEARCH_PLACEHOLDER": "חיפוש לפי שם.",
     "SEARCH_LABEL": "חיפוש פוסטים לפי שם",
-    "RETRY": "נסו שוב"
+    "RETRY": "נסו שוב",
+    "LIKES": "לייקים: {{count}}"
   },
   "CREATE_POST": {
     "TITLE": "יצירת פוסט",
@@ -38,7 +36,7 @@
     "MEDIA": "כתובת מדיה",
     "POST_NAME_REQUIRED": "יש להזין שם לפוסט.",
     "TEXT_REQUIRED": "יש להזין תוכן לפוסט.",
-    "TEXT_MAX_LENGTH": "יש להזין עד 200 תווים.",
+    "TEXT_MAX_LENGTH": "יש להזין עד {{maxLength}} תווים.",
     "MEDIA_INVALID": "יש להזין כתובת URL תקינה.",
     "CREATE_ERROR": "יצירת הפוסט נכשלה. נסו שוב.",
     "CREATE_SUCCESS": "הפוסט נוצר בהצלחה.",

@@ -8,6 +8,15 @@ export const useStyles = createUseStyles({
     margin: "40px auto",
     padding: "32px 24px",
     boxSizing: "border-box",
+
+    [down("phone")]: {
+      margin: "24px auto",
+      padding: "20px 12px",
+    },
+
+    [down("smallPhone")]: {
+      padding: "16px 8px",
+    },
   },
 
   title: {
@@ -16,6 +25,15 @@ export const useStyles = createUseStyles({
     fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
+
+    [down("phone")]: {
+      fontSize: 24,
+      marginBottom: 22,
+    },
+
+    [down("smallPhone")]: {
+      fontSize: 21,
+    },
   },
 
   postList: {
@@ -23,6 +41,11 @@ export const useStyles = createUseStyles({
     gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
     gap: 24,
     alignItems: "stretch",
+
+    [down("phone")]: {
+      gridTemplateColumns: "1fr",
+      gap: 16,
+    },
   },
 
   postCard: {
@@ -40,6 +63,15 @@ export const useStyles = createUseStyles({
       transform: "translateY(-3px)",
       boxShadow: "0 12px 32px rgba(50, 44, 61, 0.1)",
     },
+
+    [down("phone")]: {
+      padding: 20,
+      borderRadius: 14,
+    },
+
+    [down("smallPhone")]: {
+      padding: 14,
+    },
   },
 
   postName: {
@@ -48,6 +80,10 @@ export const useStyles = createUseStyles({
     fontSize: 21,
     fontWeight: 700,
     overflowWrap: "anywhere",
+
+    [down("phone")]: {
+      fontSize: 19,
+    },
   },
 
   postText: {
@@ -120,6 +156,11 @@ export const useStyles = createUseStyles({
     borderRadius: "0.5rem",
     fontSize: "1rem",
     outlineOffset: "2px",
+
+    [down("phone")]: {
+      maxWidth: "100%",
+      marginBottom: 20,
+    },
   },
 
   retryButton: {
@@ -141,51 +182,6 @@ export const useStyles = createUseStyles({
 
     "&:active": {
       transform: "scale(0.99)",
-    },
-  },
-
-  [down("phone")]: {
-    posts: {
-      margin: "24px auto",
-      padding: "20px 12px",
-    },
-
-    title: {
-      fontSize: 24,
-      marginBottom: 22,
-    },
-
-    postList: {
-      gridTemplateColumns: "1fr",
-      gap: 16,
-    },
-
-    postCard: {
-      padding: 20,
-      borderRadius: 14,
-    },
-
-    postName: {
-      fontSize: 19,
-    },
-
-    searchInput: {
-      maxWidth: "100%",
-      marginBottom: 20,
-    },
-  },
-
-  [down("smallPhone")]: {
-    posts: {
-      padding: "16px 8px",
-    },
-
-    postCard: {
-      padding: 14,
-    },
-
-    title: {
-      fontSize: 21,
     },
   },
 });

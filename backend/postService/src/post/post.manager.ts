@@ -1,7 +1,7 @@
 import { isNil } from "lodash/fp";
 import { HTTP_STATUS } from "@libs/consts/http.consts.js";
 import type { Post } from "@libs/types/post/post.type.js";
-import type { CreatePostPayload } from "@libs/types/post/postPayload.type.js";
+import type { CreatePostPayload } from "@libs/types/post/post.type.js";
 import { postRepository } from "./post.repository.js";
 import { userService } from "../rpc.client.js";
 

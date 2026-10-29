@@ -5,7 +5,7 @@ import ContentLoader from "react-content-loader";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { isEmpty, trim } from "lodash/fp";
 import { POST_TEXT_MAX_LENGTH } from "@libs/consts/post.consts";
-import type { CreatePostPayload } from "@libs/types/post/postPayload.type";
+import type { CreatePostPayload } from "@libs/types/post/post.type";
 import { useStyles } from "./styles";
 import type { CreatePostProps } from "./types";
 import { contentService } from "../../services/content/content.service";
@@ -110,7 +110,9 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
                   !isEmpty(trim(value)) || t("TEXT_REQUIRED"),
                 maxLength: (value: string) =>
                   value.length <= POST_TEXT_MAX_LENGTH ||
-                  t("TEXT_MAX_LENGTH"),
+                  t("TEXT_MAX_LENGTH", {
+                    maxLength: POST_TEXT_MAX_LENGTH,
+                  }),
               },
             })}
           />
@@ -135,9 +137,7 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
                 const media = trim(value ?? "");
 
                 return (
-                  !media ||
-                  /^https?:\/\/.+/.test(media) ||
-                  t("MEDIA_INVALID")
+                  !media || /^https?:\/\/.+/.test(media) || t("MEDIA_INVALID")
                 );
               },
             })}
@@ -160,11 +160,7 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
           </p>
         )}
 
-        <button
-          className={classes.button}
-          type="submit"
-          disabled={isPending}
-        >
+        <button className={classes.button} type="submit" disabled={isPending}>
           {isPending ? t("CREATING") : t("SUBMIT")}
         </button>
 
@@ -178,14 +174,7 @@ const CreatePost: FC<CreatePostProps> = ({ userId }) => {
               backgroundColor="#f3f4f6"
               foregroundColor="#e5e7eb"
             >
-              <rect
-                x="0"
-                y="6"
-                rx="4"
-                ry="4"
-                width="400"
-                height="12"
-              />
+              <rect x="0" y="6" rx="4" ry="4" width="400" height="12" />
             </ContentLoader>
           </div>
         )}

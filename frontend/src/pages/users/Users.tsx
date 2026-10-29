@@ -6,10 +6,12 @@ import { times, isEmpty, map } from "lodash/fp";
 import { userService } from "../../services/user/user.service";
 import { QUERY_KEYS } from "../../utils/queryKeys";
 import { useStyles } from "./styles";
-import { UserCard } from "./userCard/UserCard";
+import UserCard from "./components/userCard";
+import { USERS_SKELETON_COUNT } from "./consts";
 
 const Users: FC = () => {
   const classes = useStyles();
+
   const { t } = useTranslation("translation", {
     keyPrefix: "USERS",
   });
@@ -23,9 +25,6 @@ const Users: FC = () => {
     queryKey: QUERY_KEYS.USERS,
     queryFn: userService.getUsers,
   });
-
-  console.log("Users:", users);
-  console.log("First user:", users[0]);
 
   return (
     <div className={classes.users}>
@@ -49,7 +48,7 @@ const Users: FC = () => {
                 <rect x="0" y="55" rx="5" ry="5" width="200" height="12" />
               </ContentLoader>
             ),
-            3,
+            USERS_SKELETON_COUNT,
           )}
         </div>
       ) : isError ? (
@@ -59,9 +58,7 @@ const Users: FC = () => {
           <button
             type="button"
             className={classes.retryButton}
-            onClick={() => {
-              void refetch();
-            }}
+            onClick={() => void refetch()}
           >
             {t("RETRY")}
           </button>

@@ -12,6 +12,18 @@ export const useStyles = createUseStyles({
     border: "1px solid #ebe6df",
     borderRadius: 20,
     boxShadow: "0 8px 28px rgba(50, 44, 61, 0.06)",
+
+    [down("phone")]: {
+      width: "calc(100% - 24px)",
+      margin: "24px auto",
+      padding: 20,
+      borderRadius: 14,
+    },
+
+    [down("smallPhone")]: {
+      width: "calc(100% - 16px)",
+      padding: 14,
+    },
   },
 
   title: {
@@ -20,12 +32,25 @@ export const useStyles = createUseStyles({
     fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
+
+    [down("phone")]: {
+      marginBottom: 22,
+      fontSize: 24,
+    },
+
+    [down("smallPhone")]: {
+      fontSize: 21,
+    },
   },
 
   form: {
     display: "flex",
     flexDirection: "column",
     gap: 22,
+
+    [down("phone")]: {
+      gap: 18,
+    },
   },
 
   field: {
@@ -58,6 +83,10 @@ export const useStyles = createUseStyles({
       borderColor: "#66856a",
       boxShadow: "0 0 0 3px rgba(102, 133, 106, 0.14)",
     },
+
+    [down("smallPhone")]: {
+      padding: "10px 12px",
+    },
   },
 
   textarea: {
@@ -80,6 +109,10 @@ export const useStyles = createUseStyles({
     "&:focus": {
       borderColor: "#66856a",
       boxShadow: "0 0 0 3px rgba(102, 133, 106, 0.14)",
+    },
+
+    [down("smallPhone")]: {
+      padding: "10px 12px",
     },
   },
 
@@ -151,42 +184,5 @@ export const useStyles = createUseStyles({
   loader: {
     width: "100%",
     overflow: "hidden",
-  },
-
-  [down("phone")]: {
-    createPost: {
-      width: "calc(100% - 24px)",
-      margin: "24px auto",
-      padding: 20,
-      borderRadius: 14,
-    },
-
-    title: {
-      marginBottom: 22,
-      fontSize: 24,
-    },
-
-    form: {
-      gap: 18,
-    },
-  },
-
-  [down("smallPhone")]: {
-    createPost: {
-      width: "calc(100% - 16px)",
-      padding: 14,
-    },
-
-    title: {
-      fontSize: 21,
-    },
-
-    input: {
-      padding: "10px 12px",
-    },
-
-    textarea: {
-      padding: "10px 12px",
-    },
   },
 });

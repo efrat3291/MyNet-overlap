@@ -6,5 +6,5 @@ export const userAxios = axios.create({
 });
 
 export const contentAxios = axios.create({
-  baseURL: config.services.content.baseURL,
+  baseURL: config.services.post.baseURL,
 });

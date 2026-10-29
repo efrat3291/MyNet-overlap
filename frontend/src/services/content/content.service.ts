@@ -1,7 +1,7 @@
 import type {
   CreatePostPayload,
   UpdatePostPayload,
-} from "@libs/types/post/postPayload.type.js";
+} from "@libs/types/post/post.type";
 import type { Post } from "@libs/types/post/post.type.js";
 import { contentAxios } from "../axios";
 

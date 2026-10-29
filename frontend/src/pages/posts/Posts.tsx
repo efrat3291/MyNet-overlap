@@ -15,7 +15,8 @@ import {
 import { contentService } from "../../services/content/content.service";
 import { QUERY_KEYS } from "../../utils/queryKeys";
 import { useStyles } from "./styles";
-import { PostCard } from "./postCard/PostCard";
+import  PostCard  from "./components/postCard";
+import { POSTS_SKELETON_COUNT } from "./consts";
 
 const Post: FC = () => {
   const classes = useStyles();
@@ -33,8 +34,6 @@ const Post: FC = () => {
     queryKey: QUERY_KEYS.POSTS,
     queryFn: contentService.getPosts,
   });
-  console.log("Posts:", posts);
-  console.log("First post:", posts[0]);
 
   const normalizedSearch = toLower(trim(searchTerm));
 
@@ -43,9 +42,6 @@ const Post: FC = () => {
     posts,
   );
 
-  const handleRetry = () => {
-    void refetch();
-  };
 
   return (
     <div className={classes.posts}>
@@ -69,7 +65,7 @@ const Post: FC = () => {
                 <rect x="0" y="55" rx="5" ry="5" width="200" height="12" />
               </ContentLoader>
             ),
-            3,
+            POSTS_SKELETON_COUNT,
           )}
         </div>
       ) : isError ? (
@@ -79,7 +75,7 @@ const Post: FC = () => {
           <button
             type="button"
             className={classes.retryButton}
-            onClick={handleRetry}
+            onClick={() => void refetch()}
           >
             {t("RETRY")}
           </button>

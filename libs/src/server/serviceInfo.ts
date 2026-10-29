@@ -1,7 +1,6 @@
 export const serviceInfo = {
   user: {
     name: "user-service",
-    env: "local",
     local: {
       port: 3000,
     },
@@ -9,7 +8,6 @@ export const serviceInfo = {
   },
   post: {
     name: "post-service",
-    env: "local",
     local: {
       port: 3001,
     },

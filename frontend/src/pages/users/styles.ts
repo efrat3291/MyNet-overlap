@@ -8,6 +8,15 @@ export const useStyles = createUseStyles({
     margin: "40px auto",
     padding: "0 24px",
     boxSizing: "border-box",
+
+    [down("phone")]: {
+      margin: "24px auto",
+      padding: "0 12px",
+    },
+
+    [down("smallPhone")]: {
+      padding: "0 8px",
+    },
   },
 
   title: {
@@ -16,12 +25,26 @@ export const useStyles = createUseStyles({
     fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
+
+    [down("phone")]: {
+      fontSize: 24,
+      marginBottom: 22,
+    },
+
+    [down("smallPhone")]: {
+      fontSize: 21,
+    },
   },
 
   userList: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
     gap: 20,
+
+    [down("phone")]: {
+      gridTemplateColumns: "1fr",
+      gap: 16,
+    },
   },
 
   userCard: {
@@ -33,6 +56,14 @@ export const useStyles = createUseStyles({
     borderRadius: 16,
     boxShadow: "0 8px 28px rgba(50, 44, 61, 0.06)",
     overflowWrap: "anywhere",
+
+    [down("phone")]: {
+      padding: 20,
+    },
+
+    [down("smallPhone")]: {
+      padding: 14,
+    },
   },
 
   displayedName: {
@@ -76,40 +107,5 @@ export const useStyles = createUseStyles({
     color: "#66616f",
     textAlign: "center",
     fontSize: 16,
-  },
-
-  [down("phone")]: {
-    users: {
-      margin: "24px auto",
-      padding: "0 12px",
-    },
-
-    title: {
-      fontSize: 24,
-      marginBottom: 22,
-    },
-
-    userList: {
-      gridTemplateColumns: "1fr",
-      gap: 16,
-    },
-
-    userCard: {
-      padding: 20,
-    },
-  },
-
-  [down("smallPhone")]: {
-    users: {
-      padding: "0 8px",
-    },
-
-    title: {
-      fontSize: 21,
-    },
-
-    userCard: {
-      padding: 14,
-    },
   },
 });
