@@ -8,8 +8,8 @@ export const useStyles = createUseStyles({
     margin: "40px auto",
     padding: 32,
     boxSizing: "border-box",
-    backgroundColor: "#fffefa",
-    border: "1px solid #ebe6df",
+    backgroundColor: "var(--surface)",
+    border: "1px solid var(--border)",
     borderRadius: 20,
     boxShadow: "0 8px 28px rgba(50, 44, 61, 0.06)",
 
@@ -28,7 +28,7 @@ export const useStyles = createUseStyles({
 
   title: {
     margin: "0 0 28px",
-    color: "#282634",
+    color: "var(--text)",
     fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
@@ -61,7 +61,7 @@ export const useStyles = createUseStyles({
   },
 
   label: {
-    color: "#454150",
+    color: "var(--text)",
     fontSize: 15,
     fontWeight: 600,
   },
@@ -71,17 +71,17 @@ export const useStyles = createUseStyles({
     minWidth: 0,
     padding: "12px 14px",
     boxSizing: "border-box",
-    border: "1px solid #dcd7cf",
+    border: "1px solid var(--border)",
     borderRadius: 10,
-    backgroundColor: "#ffffff",
-    color: "#282634",
+    backgroundColor: "var(--input-background)",
+    color: "var(--text)",
     fontSize: 15,
     outline: "none",
     transition: "border-color 180ms ease, box-shadow 180ms ease",
 
     "&:focus": {
-      borderColor: "#66856a",
-      boxShadow: "0 0 0 3px rgba(102, 133, 106, 0.14)",
+      borderColor: "var(--primary)",
+      boxShadow: "0 0 0 3px rgba(129, 140, 248, 0.14)",
     },
 
     [down("smallPhone")]: {
@@ -132,15 +132,15 @@ export const useStyles = createUseStyles({
     padding: "13px 18px",
     border: "none",
     borderRadius: 999,
-    backgroundColor: "#395543",
-    color: "#ffffff",
+    backgroundColor: "var(--primary)",
+    color: "var(--primary-text)",
     fontSize: 15,
     fontWeight: 700,
     cursor: "pointer",
     transition: "background-color 180ms ease, transform 180ms ease",
 
     "&:hover": {
-      backgroundColor: "#2d4435",
+      opacity: 0.9,
     },
 
     "&:active": {
@@ -148,7 +148,7 @@ export const useStyles = createUseStyles({
     },
 
     "&:disabled": {
-      backgroundColor: "#9aa99b",
+      opacity: 0.6,
       cursor: "not-allowed",
       transform: "none",
     },

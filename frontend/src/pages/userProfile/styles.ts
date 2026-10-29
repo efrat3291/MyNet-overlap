@@ -8,8 +8,8 @@ export const useStyles = createUseStyles({
     maxWidth: 640,
     margin: "40px auto",
     padding: 32,
-    backgroundColor: "#fffefa",
-    border: "1px solid #ebe6df",
+    backgroundColor: "var(--surface)",
+    border: "1px solid var(--border)",
     borderRadius: 16,
     boxSizing: "border-box",
   },
@@ -21,7 +21,8 @@ export const useStyles = createUseStyles({
     minWidth: 80,
     height: 80,
     borderRadius: "50%",
-    backgroundColor: "#ebe6df",
+    backgroundColor: "var(--border)",
+    color: "var(--text)",
   },
 
   info: {
@@ -33,6 +34,7 @@ export const useStyles = createUseStyles({
 
   displayedName: {
     margin: 0,
+    color: "var(--text)",
     fontSize: 24,
     overflowWrap: "anywhere",
   },
@@ -41,9 +43,10 @@ export const useStyles = createUseStyles({
     display: "flex",
     alignItems: "center",
     gap: 6,
-    color: "#777",
+    color: "var(--secondary-text)",
     overflowWrap: "anywhere",
   },
+
   postsSection: {
     display: "flex",
     flexDirection: "column",

@@ -1,52 +1,27 @@
 import { createUseStyles } from "react-jss";
-import { down } from "../../styles/breakpoints";
+import type { themes } from "../../styles/theme";
+
+type ThemeColors = (typeof themes)["light"];
 
 export const useStyles = createUseStyles({
-  navbar: {
+  navbar: (colors: ThemeColors) => ({
     display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
     flexWrap: "wrap",
-    gap: 10,
-    padding: "18px 56px",
-    backgroundColor: "#fffefa",
-    borderBottom: "1px solid #ebe6df",
-    boxShadow: "0 4px 20px rgba(50, 44, 61, 0.04)",
-  },
+    gap: 12,
+    padding: 16,
+    backgroundColor: colors.surface,
+    borderBottom: `1px solid ${colors.border}`,
+  }),
 
-  link: {
-    padding: "11px 17px",
-    border: "1px solid transparent",
-    borderRadius: 999,
-    backgroundColor: "transparent",
-    color: "#625e6c",
-    fontSize: 15,
-    fontWeight: 600,
+  link: (colors: ThemeColors) => ({
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    padding: "10px 14px",
+    border: `1px solid ${colors.border}`,
+    borderRadius: 8,
+    backgroundColor: colors.surface,
+    color: colors.text,
     cursor: "pointer",
-    transition:
-      "background-color 180ms ease, color 180ms ease, border-color 180ms ease",
-
-    "&:hover": {
-      color: "#395543",
-      backgroundColor: "#edf4e9",
-      borderColor: "#dce8d6",
-    },
-
-    "&:focus-visible": {
-      outline: "2px solid #395543",
-      outlineOffset: 3,
-    },
-  },
-
-  [down("phone")]: {
-    navbar: {
-      padding: 16,
-      gap: 8,
-    },
-
-    link: {
-      padding: "9px 12px",
-      fontSize: 14,
-    },
-  },
+  }),
 });
