@@ -15,8 +15,8 @@
     "CREATE_SUCCESS": "User created successfully.",
     "CREATING": "Creating...",
     "SUBMIT": "Create User",
-    "USERNAME_MIN_LENGTH": "Username must contain at least {{maxLength}} characters.",
-    "DISPLAYED_NAME_MIN_LENGTH": "Display name must contain at least {{maxLength}} characters."
+    "USERNAME_MIN_LENGTH": "Username must contain at least {{minLength}} characters.",
+    "DISPLAYED_NAME_MIN_LENGTH": "Display name must contain at least {{minLength}} characters."
   },
   "POSTS": {
     "TITLE": "Posts",

@@ -81,7 +81,7 @@ const CreateUser: FC = () => {
               minLength: {
                 value: USER_NAME_MIN_LENGTH,
                 message: t("USERNAME_MIN_LENGTH", {
-                  maxLength: USER_NAME_MIN_LENGTH,
+                  minLength: USER_NAME_MIN_LENGTH,
                 }),
               },
             })}
@@ -108,7 +108,7 @@ const CreateUser: FC = () => {
               minLength: {
                 value: USER_NAME_MIN_LENGTH,
                 message: t("DISPLAYED_NAME_MIN_LENGTH", {
-                  maxLength: DISPLAYED_NAME_MIN_LENGTH,
+                  minLength: DISPLAYED_NAME_MIN_LENGTH,
                 }),
               },
             })}

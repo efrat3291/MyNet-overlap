@@ -75,7 +75,7 @@ const Post: FC = () => {
           <button
             type="button"
             className={classes.retryButton}
-            onClick={() => void refetch()}
+            onClick={() => refetch()}
           >
             {t("RETRY")}
           </button>

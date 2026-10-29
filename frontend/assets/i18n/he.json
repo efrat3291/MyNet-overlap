@@ -15,8 +15,8 @@
     "CREATE_SUCCESS": "המשתמש נוצר בהצלחה.",
     "CREATING": "יוצר משתמש...",
     "SUBMIT": "יצירת משתמש",
-    "USERNAME_MIN_LENGTH": "שם המשתמש חייב להכיל לפחות {{maxLength}} תווים.",
-    "DISPLAYED_NAME_MIN_LENGTH": "שם התצוגה חייב להכיל לפחות {{maxLength}} תווים."
+    "USERNAME_MIN_LENGTH": "שם המשתמש חייב להכיל לפחות {{minLength}} תווים.",
+    "DISPLAYED_NAME_MIN_LENGTH": "שם התצוגה חייב להכיל לפחות {{minLength}} תווים."
   },
   "POSTS": {
     "TITLE": "פוסטים",
