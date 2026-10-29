@@ -5,6 +5,7 @@ import { Post } from "./pages/posts/Posts";
 import { CreateUser } from "./pages/createUser/CreateUser";
 import { Users } from "./pages/users/Users";
 import { Login } from "./pages/login/Login";
+import { UserProfile } from "./pages/userProfile/UserProfile";
 
 const App = () => {
   return (
@@ -26,6 +27,8 @@ const App = () => {
           path="/posts/create"
           element={<CreatePost userId="6ad4941cecb6a37ade582baf" />}
         />
+
+        <Route path="/users/:userId" element={<UserProfile />} />
       </Routes>
     </>
   );

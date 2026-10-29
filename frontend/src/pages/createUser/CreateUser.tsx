@@ -106,7 +106,7 @@ const CreateUser: FC = () => {
               validate: (value: string) =>
                 !isEmpty(trim(value)) || t("DISPLAYED_NAME_REQUIRED"),
               minLength: {
-                value: USER_NAME_MIN_LENGTH,
+                value: DISPLAYED_NAME_MIN_LENGTH,
                 message: t("DISPLAYED_NAME_MIN_LENGTH", {
                   minLength: DISPLAYED_NAME_MIN_LENGTH,
                 }),
