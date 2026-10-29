@@ -44,4 +44,11 @@ export const useStyles = createUseStyles({
     color: "#777",
     overflowWrap: "anywhere",
   },
+  postsSection: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 16,
+    width: "100%",
+    marginTop: 24,
+  },
 });

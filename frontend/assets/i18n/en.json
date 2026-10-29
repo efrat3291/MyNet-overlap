@@ -48,5 +48,15 @@
     "CREATE_USER": "Create User",
     "POSTS": "Posts",
     "CREATE_POST": "Create Post"
+  },
+  "USER_PROFILE": {
+    "TITLE": "User Profile",
+    "LOADING": "Loading user...",
+    "LOAD_ERROR": "Failed to load user.",
+    "NOT_FOUND": "User not found.",
+    "POSTS_TITLE": "Posts",
+    "POSTS_LOADING": "Loading posts...",
+    "POSTS_LOAD_ERROR": "Failed to load posts.",
+    "POSTS_EMPTY": "This user has not published any posts yet."
   }
 }

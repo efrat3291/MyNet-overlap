@@ -48,5 +48,15 @@
     "CREATE_USER": "יצירת משתמש",
     "POSTS": "פוסטים",
     "CREATE_POST": "יצירת פוסט"
+  },
+  "USER_PROFILE": {
+    "TITLE": "פרופיל משתמש",
+    "LOADING": "טוען משתמש...",
+    "LOAD_ERROR": "טעינת המשתמש נכשלה.",
+    "NOT_FOUND": "המשתמש לא נמצא.",
+    "POSTS_TITLE": "פוסטים",
+    "POSTS_LOADING": "טוען פוסטים...",
+    "POSTS_LOAD_ERROR": "טעינת הפוסטים נכשלה.",
+    "POSTS_EMPTY": "המשתמש עדיין לא פרסם פוסטים."
   }
 }
