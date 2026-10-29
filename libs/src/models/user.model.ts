@@ -1,5 +1,9 @@
 import { Schema, model } from "mongoose";
 import type { User } from "../types/user/user.type.js";
+import {
+  USER_NAME_MIN_LENGTH,
+  DISPLAYED_NAME_MIN_LENGTH,
+} from "../consts/user.consts.js";
 
 const userSchema = new Schema<User>({
   username: {
@@ -8,13 +12,13 @@ const userSchema = new Schema<User>({
     unique: true,
     index: true,
     trim: true,
-    minlength: 1,
+    minlength: USER_NAME_MIN_LENGTH,
   },
   displayedName: {
     type: String,
     required: true,
     trim: true,
-    minlength: 1,
+    minlength: DISPLAYED_NAME_MIN_LENGTH,
   },
 });
 

@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { UpdatePostPayload } from "./post.types";
+import type { UpdatePostPayload } from "@libs/types/post/post.type.js";
 
 import { postManager } from "./post.manager.js";
 

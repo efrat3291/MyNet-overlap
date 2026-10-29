@@ -4,9 +4,6 @@ import { postRouter } from "./post/post.router.js";
 
 const appRouter: Router = Router();
 
-appRouter.use(
-  `${serviceInfo.post.api}/posts`,
-  postRouter
-);
+appRouter.use(`${serviceInfo.post.api}/posts`, postRouter);
 
 export { appRouter };

@@ -5,23 +5,28 @@ export const rpcClientRequest = async <T>(
   method: string,
   args?: Record<string, unknown>,
 ): Promise<T> => {
-  const response = (await rpcClient.request(method, {
-    args: Object.values(args ?? {}),
-  })) as {
+  const response = await rpcClient.request(
+    method,
+    Object.values(args ?? {}),
+  );
+
+  const rpcResponse = response as {
     result?: T;
-    error?: { message: string };
+    error?: { message: string; code?: number };
   };
 
-  if (response.error) {
-    throw new Error(response.error.message);
+  if (rpcResponse.error) {
+    throw new Error(
+      `RPC error ${rpcResponse.error.code}: ${rpcResponse.error.message}`,
+    );
   }
 
-  return response.result as T;
+  return rpcResponse.result as T;
 };
 
-export const rpcServerRequest = <T>(
-  managerFunction: (...args: any[]) => Promise<T>,
+export const rpcServerRequest = <TArgs extends unknown[], TResult>(
+  managerFunction: (...args: TArgs) => Promise<TResult>,
 ) =>
-  async ({ args }: { args: unknown[] }): Promise<T> => {
+  async (...args: TArgs): Promise<TResult> => {
     return managerFunction(...args);
   };

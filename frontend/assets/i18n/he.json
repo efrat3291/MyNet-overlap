@@ -1,0 +1,52 @@
+{
+  "USERS": {
+    "TITLE": "משתמשים",
+    "EMPTY": "לא נמצאו משתמשים.",
+    "LOAD_ERROR": "טעינת המשתמשים נכשלה. נסו שוב.",
+    "RETRY": "נסו שוב"
+  },
+  "CREATE_USER": {
+    "TITLE": "יצירת משתמש",
+    "DISPLAYED_NAME": "שם לתצוגה",
+    "USERNAME": "שם משתמש",
+    "DISPLAYED_NAME_REQUIRED": "יש להזין שם לתצוגה.",
+    "USERNAME_REQUIRED": "יש להזין שם משתמש.",
+    "CREATE_ERROR": "יצירת המשתמש נכשלה. נסו שוב.",
+    "CREATE_SUCCESS": "המשתמש נוצר בהצלחה.",
+    "CREATING": "יוצר משתמש...",
+    "SUBMIT": "יצירת משתמש",
+    "USERNAME_MIN_LENGTH": "שם המשתמש חייב להכיל לפחות {{minLength}} תווים.",
+    "DISPLAYED_NAME_MIN_LENGTH": "שם התצוגה חייב להכיל לפחות {{minLength}} תווים."
+  },
+  "POSTS": {
+    "TITLE": "פוסטים",
+    "LOAD_ERROR": "טעינת הפוסטים נכשלה. נסו שוב.",
+    "NO_SEARCH_RESULTS": "לא נמצאו פוסטים שמתאימים לחיפוש זה.",
+    "EMPTY": "לא נמצאו פוסטים.",
+    "VIEW_MEDIA": "צפייה במדיה",
+    "SEARCH_PLACEHOLDER": "חיפוש לפי שם.",
+    "SEARCH_LABEL": "חיפוש פוסטים לפי שם",
+    "RETRY": "נסו שוב",
+    "LIKES": "לייקים: {{count}}"
+  },
+  "CREATE_POST": {
+    "TITLE": "יצירת פוסט",
+    "POST_NAME": "שם הפוסט",
+    "TEXT": "תוכן הפוסט",
+    "MEDIA": "כתובת מדיה",
+    "POST_NAME_REQUIRED": "יש להזין שם לפוסט.",
+    "TEXT_REQUIRED": "יש להזין תוכן לפוסט.",
+    "TEXT_MAX_LENGTH": "יש להזין עד {{maxLength}} תווים.",
+    "MEDIA_INVALID": "יש להזין כתובת URL תקינה.",
+    "CREATE_ERROR": "יצירת הפוסט נכשלה. נסו שוב.",
+    "CREATE_SUCCESS": "הפוסט נוצר בהצלחה.",
+    "CREATING": "יוצר פוסט...",
+    "SUBMIT": "יצירת פוסט"
+  },
+  "NAVBAR": {
+    "USERS": "משתמשים",
+    "CREATE_USER": "יצירת משתמש",
+    "POSTS": "פוסטים",
+    "CREATE_POST": "יצירת פוסט"
+  }
+}
