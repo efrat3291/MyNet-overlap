@@ -4,7 +4,7 @@ import { userAxios } from "../axios";
 export type CreateUserPayload = Pick<User, "username" | "displayedName">; 
 
 export const userService = {
-  createUser: async (payload: User): Promise<User> => {
+  createUser: async (payload: CreateUserPayload): Promise<User> => {
     const response = await userAxios.post<User>("/users", payload);
     return response.data;
   },
@@ -14,4 +14,8 @@ export const userService = {
 
     return response.data;
   },
+  getUserById: async (userId: string): Promise<User> => {
+    const response = await userAxios.get<User>(`/users/${userId}`);
+    return response.data;
+  }
 };

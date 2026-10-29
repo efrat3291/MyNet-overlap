@@ -1,52 +1,67 @@
 import { createUseStyles } from "react-jss";
+import type { themes } from "../../styles/theme";
 import { down } from "../../styles/breakpoints";
 
-export const useStyles = createUseStyles({
-  navbar: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flexWrap: "wrap",
-    gap: 10,
-    padding: "18px 56px",
-    backgroundColor: "#fffefa",
-    borderBottom: "1px solid #ebe6df",
-    boxShadow: "0 4px 20px rgba(50, 44, 61, 0.04)",
-  },
+type ThemeColors = (typeof themes)["light"];
 
-  link: {
-    padding: "11px 17px",
-    border: "1px solid transparent",
-    borderRadius: 999,
-    backgroundColor: "transparent",
-    color: "#625e6c",
-    fontSize: 15,
+export const useStyles = createUseStyles({
+  navbar: (colors: ThemeColors) => ({
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+    width: "100%",
+    padding: "16px 24px",
+    backgroundColor: colors.surface,
+    borderBottom: `1px solid ${colors.border}`,
+    boxShadow: "0 4px 16px rgba(48, 39, 71, 0.04)",
+    transition: "background-color 220ms ease, border-color 220ms ease",
+
+    [down("phone")]: {
+      gap: 8,
+      padding: 12,
+    },
+  }),
+
+  link: (colors: ThemeColors) => ({
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    minHeight: 42,
+    padding: "10px 16px",
+    border: `1px solid ${colors.border}`,
+    borderRadius: 12,
+    backgroundColor: colors.surface,
+    color: colors.text,
+    fontSize: 14,
     fontWeight: 600,
+    whiteSpace: "nowrap",
     cursor: "pointer",
     transition:
-      "background-color 180ms ease, color 180ms ease, border-color 180ms ease",
+      "background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease",
 
     "&:hover": {
-      color: "#395543",
-      backgroundColor: "#edf4e9",
-      borderColor: "#dce8d6",
+      backgroundColor: colors.primary,
+      color: colors.primaryText,
+      borderColor: colors.primary,
+      transform: "translateY(-1px)",
+    },
+
+    "&:active": {
+      transform: "translateY(0)",
     },
 
     "&:focus-visible": {
-      outline: "2px solid #395543",
+      outline: `3px solid ${colors.primary}`,
       outlineOffset: 3,
     },
-  },
 
-  [down("phone")]: {
-    navbar: {
-      padding: 16,
-      gap: 8,
-    },
-
-    link: {
+    [down("phone")]: {
+      flex: "1 1 auto",
       padding: "9px 12px",
-      fontSize: 14,
+      fontSize: 13,
     },
-  },
+  }),
 });

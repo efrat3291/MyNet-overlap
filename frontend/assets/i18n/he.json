@@ -27,7 +27,8 @@
     "SEARCH_PLACEHOLDER": "חיפוש לפי שם.",
     "SEARCH_LABEL": "חיפוש פוסטים לפי שם",
     "RETRY": "נסו שוב",
-    "LIKES": "לייקים: {{count}}"
+    "LIKES": "לייקים: {{count}}",
+    "VIEW_PDF": "צפייה בקובץ PDF"
   },
   "CREATE_POST": {
     "TITLE": "יצירת פוסט",
@@ -47,6 +48,18 @@
     "USERS": "משתמשים",
     "CREATE_USER": "יצירת משתמש",
     "POSTS": "פוסטים",
-    "CREATE_POST": "יצירת פוסט"
+    "CREATE_POST": "יצירת פוסט",
+    "DARK_MODE": "מצב כהה",
+    "LIGHT_MODE": "מצב בהיר"
+  },
+  "USER_PROFILE": {
+    "TITLE": "פרופיל משתמש",
+    "LOADING": "טוען משתמש...",
+    "LOAD_ERROR": "טעינת המשתמש נכשלה.",
+    "NOT_FOUND": "המשתמש לא נמצא.",
+    "POSTS_TITLE": "פוסטים",
+    "POSTS_LOADING": "טוען פוסטים...",
+    "POSTS_LOAD_ERROR": "טעינת הפוסטים נכשלה.",
+    "POSTS_EMPTY": "המשתמש עדיין לא פרסם פוסטים."
   }
 }

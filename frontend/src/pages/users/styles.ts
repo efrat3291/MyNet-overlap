@@ -21,7 +21,7 @@ export const useStyles = createUseStyles({
 
   title: {
     margin: "0 0 28px",
-    color: "#282634",
+    color: "var(--text)",
     fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
@@ -58,20 +58,20 @@ export const useStyles = createUseStyles({
     padding: "10px 20px",
     border: "none",
     borderRadius: 999,
-    backgroundColor: "#395543",
-    color: "#ffffff",
+    backgroundColor: "var(--primary)",
+    color: "var(--primary-text)",
     fontSize: 14,
     fontWeight: 600,
     cursor: "pointer",
 
     "&:hover": {
-      backgroundColor: "#2d4435",
+      opacity: 0.9,
     },
   },
 
   emptyState: {
     margin: "32px 0",
-    color: "#66616f",
+    color: "var(--secondary-text)",
     textAlign: "center",
     fontSize: 16,
   },

@@ -27,7 +27,8 @@
     "SEARCH_PLACEHOLDER": "Search by post name.",
     "SEARCH_LABEL": "Search posts by name",
     "RETRY": "Try again",
-    "LIKES": "Likes: {{count}}"
+    "LIKES": "Likes: {{count}}",
+    "VIEW_PDF": "View PDF"
   },
   "CREATE_POST": {
     "TITLE": "Create Post",
@@ -47,6 +48,18 @@
     "USERS": "Users",
     "CREATE_USER": "Create User",
     "POSTS": "Posts",
-    "CREATE_POST": "Create Post"
+    "CREATE_POST": "Create Post",
+    "DARK_MODE": "Dark mode",
+    "LIGHT_MODE": "Light mode"
+  },
+  "USER_PROFILE": {
+    "TITLE": "User Profile",
+    "LOADING": "Loading user...",
+    "LOAD_ERROR": "Failed to load user.",
+    "NOT_FOUND": "User not found.",
+    "POSTS_TITLE": "Posts",
+    "POSTS_LOADING": "Loading posts...",
+    "POSTS_LOAD_ERROR": "Failed to load posts.",
+    "POSTS_EMPTY": "This user has not published any posts yet."
   }
 }
