@@ -27,7 +27,8 @@
     "SEARCH_PLACEHOLDER": "חיפוש לפי שם.",
     "SEARCH_LABEL": "חיפוש פוסטים לפי שם",
     "RETRY": "נסו שוב",
-    "LIKES": "לייקים: {{count}}"
+    "LIKES": "לייקים: {{count}}",
+    "VIEW_PDF": "צפייה בקובץ PDF"
   },
   "CREATE_POST": {
     "TITLE": "יצירת פוסט",

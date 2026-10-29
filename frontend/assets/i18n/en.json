@@ -27,7 +27,8 @@
     "SEARCH_PLACEHOLDER": "Search by post name.",
     "SEARCH_LABEL": "Search posts by name",
     "RETRY": "Try again",
-    "LIKES": "Likes: {{count}}"
+    "LIKES": "Likes: {{count}}",
+    "VIEW_PDF": "View PDF"
   },
   "CREATE_POST": {
     "TITLE": "Create Post",

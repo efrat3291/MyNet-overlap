@@ -28,6 +28,38 @@ export const useStyles = createUseStyles({
     },
   },
 
+  author: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 4,
+    marginBottom: 16,
+  },
+
+  authorLink: {
+    color: "var(--primary)",
+    fontSize: 15,
+    fontWeight: 700,
+    textDecoration: "none",
+    overflowWrap: "anywhere",
+
+    "&:hover": {
+      textDecoration: "underline",
+    },
+
+    "&:focus-visible": {
+      outline: "2px solid var(--primary)",
+      outlineOffset: 3,
+      borderRadius: 2,
+    },
+  },
+
+  username: {
+    color: "var(--secondary-text)",
+    fontSize: 13,
+    overflowWrap: "anywhere",
+  },
+
   postName: {
     margin: "0 0 12px",
     color: "var(--text)",
@@ -49,19 +81,43 @@ export const useStyles = createUseStyles({
     overflowWrap: "anywhere",
   },
 
+  mediaImageLink: {
+    display: "block",
+    alignSelf: "flex-start",
+    maxWidth: "100%",
+    marginBottom: 16,
+    borderRadius: 12,
+    overflow: "hidden",
+  },
+
+  mediaImage: {
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: 480,
+    width: "auto",
+    height: "auto",
+    objectFit: "contain",
+    borderRadius: 12,
+  },
+
   mediaLink: {
     display: "inline-block",
     alignSelf: "flex-start",
-    marginTop: "auto",
     marginBottom: 16,
     color: "var(--primary)",
     fontWeight: 600,
     textDecoration: "none",
+    overflowWrap: "anywhere",
     transition: "color 180ms ease",
 
     "&:hover": {
       textDecoration: "underline",
       opacity: 0.8,
+    },
+
+    "&:focus-visible": {
+      outline: "2px solid var(--primary)",
+      outlineOffset: 3,
     },
   },
 
