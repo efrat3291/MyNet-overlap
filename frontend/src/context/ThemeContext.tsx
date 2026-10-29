@@ -23,18 +23,34 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   useEffect(() => {
     const root = document.documentElement;
 
-    root.style.setProperty("--background", colors.background);
-    root.style.setProperty("--surface", colors.surface);
-    root.style.setProperty("--text", colors.text);
-    root.style.setProperty("--secondary-text", colors.secondaryText);
-    root.style.setProperty("--border", colors.border);
-    root.style.setProperty("--primary", colors.primary);
-    root.style.setProperty("--primary-text", colors.primaryText);
-    root.style.setProperty("--input-background", colors.inputBackground);
+    const cssVariables = {
+      "--background": colors.background,
+      "--surface": colors.surface,
+      "--text": colors.text,
+      "--secondary-text": colors.secondaryText,
+      "--border": colors.border,
+      "--primary": colors.primary,
+      "--primary-text": colors.primaryText,
+      "--input-background": colors.inputBackground,
+      "--primary-hover": colors.primaryHover,
+      "--primary-light": colors.primaryLight,
+      "--primary-soft": colors.primarySoft,
+      "--surface-hover": colors.surfaceHover,
+      "--border-focus": colors.borderFocus,
+      "--success": colors.success,
+      "--error": colors.error,
+      "--warning": colors.warning,
+      "--shadow-md": colors.shadow,
+    };
+
+    Object.entries(cssVariables).forEach(([property, value]) => {
+      root.style.setProperty(property, value);
+    });
 
     root.style.backgroundColor = colors.background;
     root.style.color = colors.text;
-  }, [colors]);
+    root.style.colorScheme = theme;
+  }, [colors, theme]);
 
   const toggleTheme = () => {
     setTheme((currentTheme) =>
