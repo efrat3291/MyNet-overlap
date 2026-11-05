@@ -21,7 +21,7 @@ export const useStyles = createUseStyles({
 
   title: {
     margin: "0 0 28px",
-    color: "#282634",
+    color: "var(--text)",
     fontSize: 28,
     fontWeight: 700,
     textAlign: "center",
@@ -62,10 +62,10 @@ export const useStyles = createUseStyles({
   emptyState: {
     gridColumn: "1 / -1",
     padding: "48px 20px",
-    border: "1px dashed #dcd7cf",
+    border: "1px dashed var(--border)",
     borderRadius: 16,
-    backgroundColor: "#fffefa",
-    color: "#6d6878",
+    backgroundColor: "var(--surface)",
+    color: "var(--secondary-text)",
     fontSize: 15,
     textAlign: "center",
   },
@@ -78,8 +78,10 @@ export const useStyles = createUseStyles({
     boxSizing: "border-box",
     padding: "0.75rem 1rem",
     marginBottom: "1.5rem",
-    border: "1px solid #d1d5db",
+    border: "1px solid var(--border)",
     borderRadius: "0.5rem",
+    backgroundColor: "var(--input-background)",
+    color: "var(--text)",
     fontSize: "1rem",
     outlineOffset: "2px",
 
@@ -95,15 +97,15 @@ export const useStyles = createUseStyles({
     padding: "12px 22px",
     border: "none",
     borderRadius: 999,
-    backgroundColor: "#395543",
-    color: "#ffffff",
+    backgroundColor: "var(--primary)",
+    color: "var(--primary-text)",
     fontSize: 15,
     fontWeight: 700,
     cursor: "pointer",
     transition: "background-color 180ms ease, transform 180ms ease",
 
     "&:hover": {
-      backgroundColor: "#2d4435",
+      opacity: 0.9,
     },
 
     "&:active": {

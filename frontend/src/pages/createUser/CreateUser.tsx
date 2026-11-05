@@ -10,7 +10,7 @@ import {
 } from "@libs/consts/user.consts";
 import { useStyles } from "./styles";
 import { userService } from "../../services/user/user.service";
-import type { CreateUserPayload } from "../../services/user/user.service";
+import type { CreateUserPayload } from "@libs/types/user/user.type";
 import { QUERY_KEYS } from "../../utils/queryKeys";
 
 const CreateUser: FC = () => {
@@ -106,7 +106,7 @@ const CreateUser: FC = () => {
               validate: (value: string) =>
                 !isEmpty(trim(value)) || t("DISPLAYED_NAME_REQUIRED"),
               minLength: {
-                value: USER_NAME_MIN_LENGTH,
+                value: DISPLAYED_NAME_MIN_LENGTH,
                 message: t("DISPLAYED_NAME_MIN_LENGTH", {
                   minLength: DISPLAYED_NAME_MIN_LENGTH,
                 }),
