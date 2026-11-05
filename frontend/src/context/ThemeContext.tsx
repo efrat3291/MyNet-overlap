@@ -1,65 +1,34 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import type { FC, ReactNode } from "react";
-import { themes } from "../styles/theme";
-
-type Theme = keyof typeof themes;
-
-type ThemeContextType = {
-  theme: Theme;
-  colors: (typeof themes)[Theme];
-  toggleTheme: () => void;
-};
+import { createContext, useContext, useState } from "react";
+import type { FC } from "react";
+import type {
+  Theme,
+  ThemeContextType,
+  ThemeProviderProps,
+} from "../utils/types/theme.type";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-type ThemeProviderProps = {
-  children: ReactNode;
-};
-
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("light");
-  const colors = themes[theme];
+  const [theme, setTheme] = useState<Theme>(() => {
+    const savedTheme = localStorage.getItem("theme");
 
-  useEffect(() => {
-    const root = document.documentElement;
+    return savedTheme === "dark" ? "dark" : "light";
+  });
 
-    const cssVariables = {
-      "--background": colors.background,
-      "--surface": colors.surface,
-      "--text": colors.text,
-      "--secondary-text": colors.secondaryText,
-      "--border": colors.border,
-      "--primary": colors.primary,
-      "--primary-text": colors.primaryText,
-      "--input-background": colors.inputBackground,
-      "--primary-hover": colors.primaryHover,
-      "--primary-light": colors.primaryLight,
-      "--primary-soft": colors.primarySoft,
-      "--surface-hover": colors.surfaceHover,
-      "--border-focus": colors.borderFocus,
-      "--success": colors.success,
-      "--error": colors.error,
-      "--warning": colors.warning,
-      "--shadow-md": colors.shadow,
-    };
+  const toggleTheme = (): void => {
+    setTheme((currentTheme) => {
+      const newTheme = currentTheme === "light" ? "dark" : "light";
 
-    Object.entries(cssVariables).forEach(([property, value]) => {
-      root.style.setProperty(property, value);
+      localStorage.setItem("theme", newTheme);
+
+      return newTheme;
     });
-
-    root.style.backgroundColor = colors.background;
-    root.style.color = colors.text;
-    root.style.colorScheme = theme;
-  }, [colors, theme]);
-
-  const toggleTheme = () => {
-    setTheme((currentTheme) =>
-      currentTheme === "light" ? "dark" : "light"
-    );
   };
 
+  document.documentElement.dataset.theme = theme;
+
   return (
-    <ThemeContext.Provider value={{ theme, colors, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

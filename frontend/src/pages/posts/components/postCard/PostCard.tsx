@@ -6,36 +6,38 @@ import { userService } from "../../../../services/user/user.service";
 import { QUERY_KEYS } from "../../../../utils/queryKeys";
 import { useStyles } from "./styles";
 import type { PostCardProps } from "./types";
+import { split, toLower, includes } from "lodash/fp";
 
-const PostCard: FC<PostCardProps> = ({ post }) => {
+const PostCard: FC<PostCardProps> = ({
+  post: { postName, text, media, likes = 0, userId },
+}) => {
   const classes = useStyles();
   const { t } = useTranslation("translation", {
     keyPrefix: "POSTS",
   });
 
-  const { postName, text, media, likes = 0 } = post;
-  const userId = String(post.userId);
+  const userIdString = String(userId);
 
   const { data: user } = useQuery({
-    queryKey: [...QUERY_KEYS.USERS, userId],
-    queryFn: () => userService.getUserById(userId),
+    queryKey: [...QUERY_KEYS.USER_BY_ID, userIdString],
+    queryFn: () => userService.getUserById(userIdString),
     enabled: Boolean(userId),
   });
 
-  const mediaPath = media?.split(/[?#]/)[0].toLowerCase() ?? "";
+  const mediaPath = media ? toLower(split(/[?#]/, media)[0] ?? "") : "";
 
   const isImage =
     /\.(png|jpe?g|gif|webp|avif|bmp|svg)$/.test(mediaPath) ||
-    mediaPath.includes("encrypted-tbn") ||
-    mediaPath.includes("gstatic.com/images");
+    includes("encrypted-tbn", mediaPath) ||
+    includes("gstatic.com/images", mediaPath);
 
   const isPdf = /\.pdf$/i.test(mediaPath);
 
   return (
     <article className={classes.postCard}>
       <div className={classes.author}>
-        <Link to={`/users/${userId}`} className={classes.authorLink}>
-          {user?.displayedName ?? user?.username ?? userId}
+        <Link to={`/users/${userIdString}`} className={classes.authorLink}>
+          {user?.displayedName ?? user?.username ?? userIdString}
         </Link>
 
         {user?.username && (
@@ -47,7 +49,7 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
 
       <p className={classes.postText}>{text}</p>
 
-      {media && isImage && (
+      {isImage ? (
         <a
           className={classes.mediaImageLink}
           href={media}
@@ -61,23 +63,21 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
             loading="lazy"
           />
         </a>
+      ) : (
+        media && (
+          <a
+            className={classes.mediaLink}
+            href={media}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {isPdf ? t("VIEW_PDF") : t("VIEW_MEDIA")}
+          </a>
+        )
       )}
-
-      {media && !isImage && (
-        <a
-          className={classes.mediaLink}
-          href={media}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {isPdf ? t("VIEW_PDF") : t("VIEW_MEDIA")}
-        </a>
-      )}
-
       <div className={classes.likes}>{t("LIKES", { count: likes })}</div>
     </article>
   );
 };
 
 export { PostCard };
-export default PostCard;

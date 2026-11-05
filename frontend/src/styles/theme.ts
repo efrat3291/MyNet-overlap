@@ -41,5 +41,3 @@ export const themes = {
     shadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
   },
 };
-
-export type AppTheme = keyof typeof themes;

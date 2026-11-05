@@ -3,7 +3,8 @@
     "TITLE": "Users",
     "EMPTY": "No users found.",
     "LOAD_ERROR": "Failed to load users. Please try again.",
-    "RETRY": "Try again"
+    "RETRY": "Try again",
+    "VIEW_PROFILE": "View profile"
   },
   "CREATE_USER": {
     "TITLE": "Create User",
@@ -53,7 +54,6 @@
     "LIGHT_MODE": "Light mode"
   },
   "USER_PROFILE": {
-    "TITLE": "User Profile",
     "LOADING": "Loading user...",
     "LOAD_ERROR": "Failed to load user.",
     "NOT_FOUND": "User not found.",

@@ -1,11 +1,11 @@
 import type { User } from "@libs/types/user/user.type.js";
 import { userAxios } from "../axios";
-
-export type CreateUserPayload = Pick<User, "username" | "displayedName">; 
+import type { CreateUserPayload } from "@libs/types/user/user.type.js";
 
 export const userService = {
   createUser: async (payload: CreateUserPayload): Promise<User> => {
     const response = await userAxios.post<User>("/users", payload);
+
     return response.data;
   },
 
@@ -16,6 +16,7 @@ export const userService = {
   },
   getUserById: async (userId: string): Promise<User> => {
     const response = await userAxios.get<User>(`/users/${userId}`);
+
     return response.data;
   }
 };

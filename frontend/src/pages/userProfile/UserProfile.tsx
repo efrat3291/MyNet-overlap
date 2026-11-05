@@ -8,10 +8,11 @@ import { contentService } from "../../services/content/content.service";
 import { QUERY_KEYS } from "../../utils/queryKeys";
 import { PostCard } from "../posts/components/postCard/PostCard";
 import { useStyles } from "./styles";
+import { filter, isEmpty, map } from "lodash/fp";
 
 const UserProfile: FC = () => {
   const classes = useStyles();
-  const { userId } = useParams<{ userId: string }>();
+  const { userId } = useParams();
 
   const { t } = useTranslation("translation", {
     keyPrefix: "USER_PROFILE",
@@ -22,7 +23,7 @@ const UserProfile: FC = () => {
     isLoading: isUserLoading,
     isError: isUserError,
   } = useQuery({
-    queryKey: [...QUERY_KEYS.USERS, userId],
+    queryKey: [...QUERY_KEYS.USER_BY_ID, userId],
     queryFn: () => userService.getUserById(userId!),
     enabled: Boolean(userId),
   });
@@ -34,57 +35,51 @@ const UserProfile: FC = () => {
   } = useQuery({
     queryKey: QUERY_KEYS.POSTS,
     queryFn: contentService.getPosts,
-    enabled: Boolean(userId),
   });
 
-  if (!userId) {
-    return <p>{t("NOT_FOUND")}</p>;
-  }
+  const userPosts = filter(
+    (post) => String(post.userId) === userId,
+    posts ?? [],
+  );
 
-  if (isUserLoading) {
-    return <p>{t("LOADING")}</p>;
-  }
-
-  if (isUserError) {
-    return <p>{t("LOAD_ERROR")}</p>;
-  }
-
-  if (!user) {
-    return <p>{t("NOT_FOUND")}</p>;
-  }
-
-  const userPosts =
-    posts?.filter((post) => String(post.userId) === userId) ?? [];
   return (
     <div className={classes.profile}>
-      <div className={classes.avatar}>
-        <UserRound size={52} strokeWidth={1.5} />
-      </div>
+      {!userId ? (
+        <p>{t("NOT_FOUND")}</p>
+      ) : isUserLoading ? (
+        <p>{t("LOADING")}</p>
+      ) : isUserError ? (
+        <p>{t("LOAD_ERROR")}</p>
+      ) : !user ? (
+        <p>{t("NOT_FOUND")}</p>
+      ) : (
+        <>
+          <UserRound className={classes.avatar} size={52} strokeWidth={1.5} />
 
-      <div className={classes.info}>
-        <h1 className={classes.displayedName}>{user.displayedName}</h1>
+          <div className={classes.info}>
+            <h1 className={classes.displayedName}>{user.displayedName}</h1>
 
-        <div className={classes.username}>
-          <AtSign size={16} />
-          <span>{user.username}</span>
-        </div>
-      </div>
+            <div className={classes.username}>
+              <AtSign size={16} />
+              <span>{user.username}</span>
+            </div>
+          </div>
 
-      <section className={classes.postsSection}>
-        <h2>{t("POSTS_TITLE")}</h2>
+          <section className={classes.postsSection}>
+            <h2>{t("POSTS_TITLE")}</h2>
 
-        {arePostsLoading && <p>{t("POSTS_LOADING")}</p>}
-
-        {arePostsError && <p>{t("POSTS_LOAD_ERROR")}</p>}
-
-        {!arePostsLoading && !arePostsError && userPosts.length === 0 && (
-          <p>{t("POSTS_EMPTY")}</p>
-        )}
-
-        {!arePostsLoading &&
-          !arePostsError &&
-          userPosts.map((post) => <PostCard key={post._id} post={post} />)}
-      </section>
+            {arePostsLoading ? (
+              <p>{t("POSTS_LOADING")}</p>
+            ) : arePostsError ? (
+              <p>{t("POSTS_LOAD_ERROR")}</p>
+            ) : isEmpty(userPosts) ? (
+              <p>{t("POSTS_EMPTY")}</p>
+            ) : (
+              map((post) => <PostCard key={post._id} post={post} />, userPosts)
+            )}
+          </section>
+        </>
+      )}
     </div>
   );
 };

@@ -7,7 +7,8 @@ import {
 } from "@tanstack/react-query";
 import App from "./App";
 import "./i18n";
-import { ThemeProvider } from "../src/context/ThemeContext";
+import { ThemeProvider } from "./context/themeContext";
+import "./index.css";
 
 const queryClient = new QueryClient();
 

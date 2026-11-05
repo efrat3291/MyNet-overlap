@@ -3,11 +3,16 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "./styles";
 import type { UserCardProps } from "./types";
+import { useTranslation } from "react-i18next";
 
 const UserCard: FC<UserCardProps> = ({
   user: { _id, displayedName, username },
 }) => {
   const classes = useStyles();
+
+  const { t } = useTranslation("translation", {
+  keyPrefix: "USERS",
+});
 
   return (
     <article className={classes.userCard}>
@@ -16,7 +21,7 @@ const UserCard: FC<UserCardProps> = ({
       <p className={classes.username}>@{username}</p>
 
       <Link to={`/users/${_id}`}>
-        View profile
+        {t("VIEW_PROFILE")}
       </Link>
     </article>
   );
