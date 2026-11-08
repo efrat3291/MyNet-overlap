@@ -10,4 +10,8 @@ export const userRepository = {
 
   getById: async (id: string): Promise<User> =>
     await UserModel.findById(id).orFail().exec(),
+
+  getByUserName: async (username: string): Promise<User> => 
+    await UserModel.findOne({ username }).orFail().exec(),
+  
 };

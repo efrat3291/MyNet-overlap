@@ -1,10 +1,14 @@
 import "dotenv/config";
 import { serviceInfo } from "@libs/server/serviceInfo";
 
-const { MONGO_URI } = process.env;
+const { MONGO_URI, RPC_HOSTNAME } = process.env;
 
 if (!MONGO_URI) {
   throw new Error("Missing MONGO_URI environment variable");
+}
+
+if (!RPC_HOSTNAME) {
+  throw new Error("Missing RPC_HOSTNAME environment variable");
 }
 
 export const config = {
@@ -14,4 +18,8 @@ export const config = {
   server: {
     port: serviceInfo.user.local.port,
   },
+  rpc: {
+    host: RPC_HOSTNAME,
+    port: serviceInfo.post.local.port,
+  }
 };

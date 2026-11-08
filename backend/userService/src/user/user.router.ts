@@ -5,6 +5,7 @@ import {
   canCreate,
   canGetById,
   canGetAll,
+  canDeleteUserPosts,
 } from "./user.validator.js";
 
 const userRouter = Router();
@@ -26,5 +27,13 @@ userRouter.get(
   validateRequest(canGetById),
   userController.getById,
 );
+
+userRouter.delete(
+  "/:username/posts",
+  validateRequest(canDeleteUserPosts),
+  userController.deleteUserPosts,
+);
+
+console.log("DELETE USER POSTS ROUTE LOADED");
 
 export { userRouter };

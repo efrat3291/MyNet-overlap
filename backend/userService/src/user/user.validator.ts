@@ -30,3 +30,11 @@ export const canGetAll = Joi.object({
   params: Joi.object(),
   query: Joi.object(),
 });
+
+export const canDeleteUserPosts = Joi.object({
+  body: Joi.object(),
+  params: Joi.object({
+    username: Joi.string().trim().required(),
+  }).required(),
+  query: Joi.object(),
+});

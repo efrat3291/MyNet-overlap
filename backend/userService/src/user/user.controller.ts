@@ -16,4 +16,13 @@ export const userController = {
   ): Promise<void> => {
     res.status(200).json(await userManager.getById(req.params.id));
   },
+
+  deleteUserPosts: async (
+    req: Request<{ username: string }>,
+    res: Response,
+  ): Promise<void> => {
+    const deletedCount = await userManager.deleteUserPosts(req.params.username);
+
+    res.status(200).json({ deletedCount });
+  },
 };
