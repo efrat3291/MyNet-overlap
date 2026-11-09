@@ -5,6 +5,7 @@ import { config } from "./config.js";
 import { appRouter } from "./router.js";
 import cors from "cors";
 import { startServer } from "@libs/server/startServer.js";
+import { rpcServer } from "./rpc.server.js";
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(
 );
 
 app.use(appRouter);
+
+app.use("/rpc/posts", rpcServer.middleware());
 
 startServer(
   app,

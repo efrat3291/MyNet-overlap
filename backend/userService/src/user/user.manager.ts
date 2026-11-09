@@ -1,5 +1,5 @@
 import { userRepository } from "./user.repository.js";
-import type { User } from "@libs/types/user/user.type.js";
+import  { postService } from "../rpc.client.js"
 
 export const userManager = {
   create: userRepository.create,
@@ -7,4 +7,12 @@ export const userManager = {
   getAll: userRepository.getAll,
 
   getById: userRepository.getById,
+
+  getByUserName: userRepository.getByUserName,
+
+  deleteUserPosts: async (username: string): Promise<number> => {
+    const user = await userRepository.getByUserName(username);
+
+    return await postService.deletePostsByUserId(String(user._id));
+  },
 };

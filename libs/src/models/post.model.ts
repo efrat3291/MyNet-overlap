@@ -16,6 +16,7 @@ const postSchema = new Schema<Post>(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      index: true,
     },
     text: {
       type: String,
@@ -49,5 +50,8 @@ const postSchema = new Schema<Post>(
     },
   },
 );
+
+postSchema.index({ createdAt: -1 });
+
 
 export const PostModel = model<Post>("Post", postSchema);
