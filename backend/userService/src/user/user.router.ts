@@ -34,6 +34,4 @@ userRouter.delete(
   userController.deleteUserPosts,
 );
 
-console.log("DELETE USER POSTS ROUTE LOADED");
-
 export { userRouter };
